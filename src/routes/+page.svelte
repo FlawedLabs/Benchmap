@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { authClient } from '$lib/auth-client';
+	import BenchCard from '$lib/components/BenchCard.svelte';
+	import { m } from '$lib/paraglide/messages.js';
+
 	const session = authClient.useSession();
 </script>
 
@@ -17,7 +20,7 @@
 					await authClient.signOut();
 				}}
 			>
-				Sign Out
+				{m.sign_out()}
 			</button>
 		</div>
 	{:else}
@@ -28,7 +31,9 @@
 				});
 			}}
 		>
-			Continue with github
+			{m.continue_github()}
 		</button>
 	{/if}
 </div>
+
+<BenchCard />

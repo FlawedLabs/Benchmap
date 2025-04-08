@@ -39,9 +39,11 @@
 	},
 	"dependencies": {
 		"@inlang/paraglide-js": "^2.0.0",
+		"@lucide/svelte": "^0.487.0",
 		"@prisma/client": "^6.5.0",
 		"better-auth": "^1.2.5",
-		"better-sqlite3": "^11.9.1"
+		"better-sqlite3": "^11.9.1",
+		"leaflet": "^1.9.4"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
