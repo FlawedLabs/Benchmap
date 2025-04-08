@@ -1,15 +1,11 @@
 <script lang="ts">
 	import { Share } from '@lucide/svelte';
-	import BenchCover from './BenchCover.svelte';
+	import Slider from '$lib/components/Slider.svelte';
 </script>
 
 <div class="mx-auto max-w-md overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md">
 	<div class="relative">
-		<!-- Maybe try to reuse Benchcover in /Users/maxime/Documents/Projets/benchmap/src/routes/bench/[uuid]/+page.svelte -->
-		<BenchCover
-			src="https://images.unsplash.com/photo-1445937888010-cc262f556033?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-			alt="Banc"
-		/>
+		<Slider />
 		<span class="absolute top-2 left-2 rounded-full bg-white px-2 py-1 text-sm text-gray-700 shadow"
 			>En vedette ✨</span
 		>
