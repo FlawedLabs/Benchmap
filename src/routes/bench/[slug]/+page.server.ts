@@ -19,7 +19,7 @@ export const load: PageServerLoad = async ({ params }) => {
 		});
 
 		if (!bench) {
-			throw error(404, 'Bench not found');
+			error(404, 'Bench not found');
 		}
 
 		return {

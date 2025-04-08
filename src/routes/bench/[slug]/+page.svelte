@@ -25,14 +25,14 @@
 		<img
 			src="https://images.unsplash.com/photo-1445937888010-cc262f556033?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 			alt="Banc rose"
-			class="h-64 w-full object-cover sm:h-80"
+			class="h-64 w-full rounded-2xl object-cover sm:h-80"
 		/>
 		<a href="/" class="absolute top-4 left-4 rounded-full bg-white p-2 shadow">
 			<ArrowLeft size={16} />
 		</a>
 		<button
 			onclick={copyInClipboard}
-			class="absolute top-4 right-4 rounded-full bg-white p-2 shadow"
+			class="absolute top-4 right-4 cursor-pointer rounded-full bg-white p-2 shadow"
 		>
 			<Share size={16} />
 		</button>
@@ -44,7 +44,7 @@
 
 		<div class="mt-2 flex items-center text-sm text-gray-600">
 			<span class="flex items-center font-semibold text-green-600">
-				<span class="text-xl">🟢</span> Ouvert
+				<span class="font-semibold text-green-600">● Ouvert</span>
 			</span>
 			<span class="mx-2">•</span>
 			<span>320 m</span>
@@ -58,15 +58,20 @@
 			>
 		</div>
 
-		<div class="mt-3 flex items-center gap-2 text-sm">
-			<span class="text-lg">🥺</span>
-			<span class="text-gray-600">A essayer</span>
-		</div>
-
-		<div class="mt-4 flex items-center justify-between text-sm text-gray-700">
-			<span>Évalué par <strong>Emilie V</strong> & 1k personnes</span>
-			<span class="font-medium">★ 4,68</span>
-		</div>
+		{#if data.bench?.reviews.length > 0}
+			<div class="mt-4 flex items-center justify-between text-sm text-gray-700">
+				<span
+					>Évalué par <strong>{data.bench?.reviews[0].reviewer.name}</strong> & {data.bench?.reviews
+						.length - 1} personne{#if data.bench?.reviews.length - 1 > 1}s{/if}</span
+				>
+				<span class="font-medium"
+					>★ {data.bench?.reviews.reduce((acc, review) => acc + review.rating, 0) /
+						data.bench?.reviews.length}</span
+				>
+			</div>
+		{:else}
+			Soyez le premier à laisser un avis !
+		{/if}
 
 		<div class="mt-4 grid gap-4 sm:grid-cols-2">
 			{#if data.bench}
