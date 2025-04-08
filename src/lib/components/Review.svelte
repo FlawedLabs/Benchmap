@@ -16,7 +16,7 @@
 	const { profileSrc, reviewerName, comment, tags, createdAt = new Date() }: IProps = $props();
 </script>
 
-<div class="rounded-xl border bg-gray-50 p-4 text-sm text-gray-800">
+<div class="rounded-xl p-4 text-sm text-gray-800 shadow-sm transition-shadow hover:shadow-md">
 	<div class="mb-1 flex items-center gap-2">
 		<ProfilePicture src={profileSrc} />
 		<span class="font-medium">{reviewerName}</span>

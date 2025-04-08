@@ -44,7 +44,8 @@
 		"@prisma/client": "^6.5.0",
 		"better-auth": "^1.2.5",
 		"better-sqlite3": "^11.9.1",
-		"leaflet": "^1.9.4"
+		"leaflet": "^1.9.4",
+		"svelte-sonner": "^0.3.28"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [

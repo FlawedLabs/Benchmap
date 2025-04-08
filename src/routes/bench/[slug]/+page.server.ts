@@ -1,10 +1,9 @@
 import type { PageServerLoad } from './$types';
 import prisma from '$lib/prisma';
+import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;
-
-	console.log('monSlug', slug);
 
 	if (slug) {
 		const bench = await prisma.bench.findUnique({
@@ -19,14 +18,14 @@ export const load: PageServerLoad = async ({ params }) => {
 			}
 		});
 
-		console.log('bench', bench);
+		if (!bench) {
+			throw error(404, 'Bench not found');
+		}
 
 		return {
 			bench
 		};
 	}
 
-	return {
-		bench: null
-	};
+	error(401, 'No bench specified');
 };

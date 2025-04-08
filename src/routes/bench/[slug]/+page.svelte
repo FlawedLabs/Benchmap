@@ -6,9 +6,18 @@
 	import Map from '$lib/components/Map.svelte';
 	import Review from '$lib/components/Review.svelte';
 	import { ArrowLeft, Share } from '@lucide/svelte';
-	import { onMount } from 'svelte';
+	import { toast } from 'svelte-sonner';
 
 	const { data }: PageProps = $props();
+
+	const copyInClipboard = () => {
+		if (navigator.clipboard) {
+			navigator.clipboard.writeText(window.location.href);
+			toast.success('Lien copié dans le presse-papier');
+		} else {
+			toast.error('Impossible de copier le lien');
+		}
+	};
 </script>
 
 <div class="mx-auto max-w-2xl bg-white">
@@ -18,10 +27,13 @@
 			alt="Banc rose"
 			class="h-64 w-full object-cover sm:h-80"
 		/>
-		<button class="absolute top-4 left-4 rounded-full bg-white p-2 shadow">
+		<a href="/" class="absolute top-4 left-4 rounded-full bg-white p-2 shadow">
 			<ArrowLeft size={16} />
-		</button>
-		<button class="absolute top-4 right-4 rounded-full bg-white p-2 shadow">
+		</a>
+		<button
+			onclick={copyInClipboard}
+			class="absolute top-4 right-4 rounded-full bg-white p-2 shadow"
+		>
 			<Share size={16} />
 		</button>
 	</div>
@@ -71,7 +83,10 @@
 		</div>
 	</div>
 
-	<Map center={[48.866667, 2.333333]} marker={[51.505, -0.09]} />
+	<Map
+		center={[data.bench?.latitude, data?.bench.longitude]}
+		marker={[data.bench?.latitude, data?.bench.longitude]}
+	/>
 
 	<div class="fixed inset-x-0 bottom-0 border-t bg-white p-3 sm:static sm:border-none sm:p-0">
 		<button

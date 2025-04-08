@@ -2,7 +2,7 @@
 	import { authClient } from '$lib/auth-client';
 
 	type IProps = {
-		src: string | null;
+		src?: string | null;
 	};
 </script>
 
@@ -13,11 +13,13 @@
 </script>
 
 <div>
-	{#if !src}
+	{#if src}
+		<img {src} alt="Profile" class="h-8 w-8 rounded-full" />
+	{:else if !$session?.data?.user.image}
 		<span class="h-8 w-8 rounded-full">
 			{$session?.data?.user.name[0].toUpperCase()}
 		</span>
 	{:else}
-		<img {src} alt="Profile" class="h-8 w-8 rounded-full" />
+		<img src={$session?.data?.user.image} alt="Profile" class="h-8 w-8 rounded-full" />
 	{/if}
 </div>

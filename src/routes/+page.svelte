@@ -9,12 +9,6 @@
 <div>
 	{#if $session.data}
 		<div>
-			<p>
-				{$session?.data?.user.name}
-			</p>
-
-			<img src={$session?.data?.user.image} alt="Profile" />
-
 			<button
 				on:click={async () => {
 					await authClient.signOut();
