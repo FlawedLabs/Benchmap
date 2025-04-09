@@ -14,7 +14,8 @@ export const load: PageServerLoad = async ({ params }) => {
 						reviewer: true,
 						tags: true
 					}
-				}
+				},
+				tags: true
 			}
 		});
 

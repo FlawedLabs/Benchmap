@@ -88,10 +88,12 @@ model Bench {
 model Tag {
   id        String   @id @default(uuid())
   name      String   @unique
+  slug      String   @unique
   benches   Bench[]
   reviews   Review[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  color     Color
 
   @@map("tag")
 }
@@ -112,4 +114,29 @@ model Review {
   tags Tag[]
 
   @@map("review")
+}
+
+enum Color {
+  red
+  orange
+  amber
+  yellow
+  lime
+  green
+  emerald
+  teal
+  cyan
+  sky
+  blue
+  indigo
+  violet
+  purple
+  fuchsia
+  pink
+  rose
+  slate
+  gray
+  zinc
+  neutral
+  stone
 }

@@ -3,6 +3,7 @@
 	import Slider from '$lib/components/Slider.svelte';
 	import { onMount } from 'svelte';
 	import type { Bench } from '@prisma/client';
+	import { goto } from '$app/navigation';
 
 	let benches: Bench[] = $state([]);
 
@@ -18,13 +19,16 @@
 
 {#each benches as bench, i}
 	<div
-		class="mx-auto max-w-lg my-6 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md"
+		onclick={() => goto(`/bench/${bench.slug}`)}
+		class="mx-auto my-6 max-w-lg cursor-pointer overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md"
 	>
 		<div class="relative">
 			<Slider />
 			{#if i === 0}
 				<span
-					class="absolute top-2 left-2 rounded-full bg-white px-2 py-1 text-sm text-gray-700 shadow">En vedette ✨</span>
+					class="absolute top-2 left-2 rounded-full bg-white px-2 py-1 text-sm text-gray-700 shadow"
+					>En vedette ✨</span
+				>
 			{/if}
 			<button class="absolute top-2 right-2 rounded-full bg-white p-1 shadow">
 				<Share size={16} />
@@ -37,22 +41,19 @@
 				<span>320 m</span>
 			</div>
 
-		<h2 class="text-lg font-semibold text-gray-900">{bench.title}, Paris</h2>
-		<p class="text-sm text-gray-500">{bench.address}</p>
+			<h2 class="text-lg font-semibold text-gray-900">{bench.title}</h2>
+			<p class="text-sm text-gray-500">{bench.address}</p>
 
-		<div class="mt-3 flex flex-wrap gap-2">
-			{#each bench.tags as tag}
-					<span
-						class="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700"
-					>{tag.name}</span
-					>
-			{/each}
-			<button class="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700"
-				>Voir les plages horaires</button
-			>
+			<div class="mt-3 flex flex-wrap gap-2">
+				{#each bench.tags as tag}
+					<span class="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700">{tag.name}</span>
+				{/each}
+				<button class="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700"
+					>Voir les plages horaires</button
+				>
+			</div>
+
+			<div class="mt-3 text-sm font-medium text-gray-700">★ 4,68</div>
 		</div>
-
-		<div class="mt-3 text-sm font-medium text-gray-700">★ 4,68</div>
 	</div>
-</div>
 {/each}

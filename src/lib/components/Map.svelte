@@ -1,4 +1,6 @@
 <script lang="ts" module>
+	import { env } from '$env/dynamic/public';
+
 	type IProps = {
 		center: [number, number];
 		marker?: [number, number];
@@ -28,7 +30,7 @@
 			L = await dynamicImportLeaflet;
 			mapInstance = L.map(mapContainer).setView([51.505, -0.09], 13);
 			L.tileLayer(
-				'https://api.mapbox.com/styles/v1/kayoshi-dev/ckzlajhj3001o14o8wcf9jcd8/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoia2F5b3NoaS1kZXYiLCJhIjoiY2t6bGFncHY1MHBzMjJucXJ4cGRieGhjeCJ9._8wJbUcF5tQgwJ_xQ1xdVw',
+				`https://api.mapbox.com/styles/v1/kayoshi-dev/ckzlajhj3001o14o8wcf9jcd8/tiles/256/{z}/{x}/{y}@2x?access_token=${env.PUBLIC_MAPBOX_TOKEN}`,
 				{
 					attribution:
 						'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

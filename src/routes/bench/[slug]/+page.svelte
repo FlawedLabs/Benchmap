@@ -5,7 +5,7 @@
 <script lang="ts">
 	import Map from '$lib/components/Map.svelte';
 	import Review from '$lib/components/Review.svelte';
-	import { ArrowLeft, Share } from '@lucide/svelte';
+	import { ArrowLeft, ArrowUpRight, Share } from '@lucide/svelte';
 	import { toast } from 'svelte-sonner';
 
 	const { data }: PageProps = $props();
@@ -51,8 +51,13 @@
 		</div>
 
 		<div class="mt-4 flex flex-wrap gap-2">
-			<span class="rounded-full bg-pink-100 px-3 py-1 text-sm text-pink-800">Date 🌸</span>
-			<span class="rounded-full bg-green-100 px-3 py-1 text-sm text-green-800">Accès Gratuit</span>
+			{#each data.bench?.tags as tag}
+				<span class="rounded-full bg-{tag.color}-100 px-3 py-1 text-sm text-{tag.color}-800"
+					>{tag.name}</span
+				>
+			{/each}
+			<!-- <span class="rounded-full bg-pink-100 px-3 py-1 text-sm text-pink-800">Date 🌸</span>
+			<span class="rounded-full bg-green-100 px-3 py-1 text-sm text-green-800">Accès Gratuit</span> -->
 			<span class="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-800"
 				>Voir les plages horaires</span
 			>
@@ -61,8 +66,11 @@
 		{#if data.bench?.reviews.length > 0}
 			<div class="mt-4 flex items-center justify-between text-sm text-gray-700">
 				<span
-					>Évalué par <strong>{data.bench?.reviews[0].reviewer.name}</strong> & {data.bench?.reviews
-						.length - 1} personne{#if data.bench?.reviews.length - 1 > 1}s{/if}</span
+					>Évalué par <strong>{data.bench?.reviews[0].reviewer.name}</strong>
+
+					{#if data.bench?.reviews.length >= 2}
+						& {data.bench?.reviews.length - 1} personne{#if data.bench?.reviews.length > 2}s{/if}
+					{/if}</span
 				>
 				<span class="font-medium"
 					>★ {data.bench?.reviews.reduce((acc, review) => acc + review.rating, 0) /
@@ -97,7 +105,7 @@
 		<button
 			class="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-black py-3 text-lg text-white transition-all hover:scale-[0.98]"
 		>
-			Y aller <span>🧭</span>
+			Y aller <ArrowUpRight />
 		</button>
 	</div>
 </div>
