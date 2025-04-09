@@ -57,7 +57,10 @@
 				class="w-2 h-2 rounded-full cursor-pointer"
 				class:bg-gray-200={i === currentIndex}
 				class:bg-gray-400={i !== currentIndex}
-				onclick={() => (currentIndex = i)}
+				onclick={(event) => {
+					event.stopPropagation()
+					currentIndex = i
+				}}
 			></div>
 		{/each}
 	</div>
