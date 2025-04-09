@@ -1,9 +1,15 @@
+<script lang="ts" module>
+	import type { PageProps } from './$types';
+</script>
+
 <script lang="ts">
 	import { authClient } from '$lib/auth-client';
 	import BenchCard from '$lib/components/BenchCard.svelte';
 	import { m } from '$lib/paraglide/messages.js';
 
 	const session = authClient.useSession();
+
+	const { data }: PageProps = $props();
 </script>
 
 <div>
@@ -29,5 +35,6 @@
 		</button>
 	{/if}
 </div>
-
-<BenchCard />
+{#each data.benches as bench}
+	<BenchCard {...bench} />
+{/each}
