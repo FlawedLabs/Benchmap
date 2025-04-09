@@ -1,13 +1,15 @@
 <script lang="ts" module>
-	import type { PageProps } from './$types';
-</script>
-
-<script lang="ts">
+	import Like from '$lib/components/Like.svelte';
 	import Map from '$lib/components/Map.svelte';
 	import Review from '$lib/components/Review.svelte';
 	import { ArrowLeft, ArrowUpRight, Share } from '@lucide/svelte';
 	import { toast } from 'svelte-sonner';
+	import type { PageProps } from './$types';
+	import DistanceEstimation from '$lib/components/DistanceEstimation.svelte';
+	import { m } from '$lib/paraglide/messages';
+</script>
 
+<script lang="ts">
 	const { data }: PageProps = $props();
 
 	const copyInClipboard = () => {
@@ -20,6 +22,14 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Benchmap - {data.bench?.title}</title>
+	<meta
+		name="description"
+		content="Découvrez le banc {data.bench?.title} situé à {data.bench?.address}."
+	/>
+</svelte:head>
+
 <div class="mx-auto max-w-2xl bg-white">
 	<div class="relative">
 		<img
@@ -30,12 +40,15 @@
 		<a href="/" class="absolute top-4 left-4 rounded-full bg-white p-2 shadow">
 			<ArrowLeft size={16} />
 		</a>
-		<button
-			onclick={copyInClipboard}
-			class="absolute top-4 right-4 cursor-pointer rounded-full bg-white p-2 shadow"
-		>
-			<Share size={16} />
-		</button>
+		<div class="absolute top-4 right-4 flex gap-2">
+			<Like isLiked={data.isLiked} />
+			<button
+				onclick={copyInClipboard}
+				class="cursor-pointer rounded-full bg-white p-2 shadow transition-all active:scale-95"
+			>
+				<Share size={16} />
+			</button>
+		</div>
 	</div>
 
 	<div class="p-4">
@@ -44,10 +57,11 @@
 
 		<div class="mt-2 flex items-center text-sm text-gray-600">
 			<span class="flex items-center font-semibold text-green-600">
-				<span class="font-semibold text-green-600">● Ouvert</span>
+				<span class="font-semibold text-green-600">● {m.bench_state_open()}</span>
 			</span>
 			<span class="mx-2">•</span>
-			<span>320 m</span>
+
+			<DistanceEstimation latitude={data.bench?.latitude} longitude={data.bench?.longitude} />
 		</div>
 
 		<div class="mt-4 flex flex-wrap gap-2">
@@ -56,8 +70,6 @@
 					>{tag.name}</span
 				>
 			{/each}
-			<!-- <span class="rounded-full bg-pink-100 px-3 py-1 text-sm text-pink-800">Date 🌸</span>
-			<span class="rounded-full bg-green-100 px-3 py-1 text-sm text-green-800">Accès Gratuit</span> -->
 			<span class="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-800"
 				>Voir les plages horaires</span
 			>

@@ -8,16 +8,17 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(uuid())
+  id            String      @id @default(uuid())
   name          String
   email         String
   emailVerified Boolean
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
   sessions      Session[]
   accounts      Account[]
   reviews       Review[]
+  benchLikes    BenchLike[]
 
   @@unique([email])
   @@map("user")
@@ -69,20 +70,35 @@ model Verification {
 }
 
 model Bench {
-  id           String   @id @default(uuid())
+  id           String      @id @default(uuid())
   title        String
-  slug         String   @unique
+  slug         String      @unique
   latitude     Float
   longitude    Float
   address      String?
   openingHours String?
-  rating       Float    @default(0)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  rating       Float       @default(0)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
   tags         Tag[]
   reviews      Review[]
+  benchLikes   BenchLike[]
 
   @@map("bench")
+}
+
+model BenchLike {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  benchId String
+  bench   Bench  @relation(fields: [benchId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, benchId])
+  @@map("bench_like")
 }
 
 model Tag {

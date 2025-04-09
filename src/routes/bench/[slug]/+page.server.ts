@@ -1,9 +1,13 @@
 import type { PageServerLoad } from './$types';
 import prisma from '$lib/prisma';
 import { error } from '@sveltejs/kit';
+import { auth } from '$lib/server/auth';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, request }) => {
 	const { slug } = params;
+	const session = await auth.api.getSession({
+		headers: request.headers
+	});
 
 	if (slug) {
 		const bench = await prisma.bench.findUnique({
@@ -15,7 +19,13 @@ export const load: PageServerLoad = async ({ params }) => {
 						tags: true
 					}
 				},
-				tags: true
+				tags: true,
+				benchLikes: {
+					select: { id: true },
+					where: {
+						userId: session?.user?.id
+					}
+				}
 			}
 		});
 
@@ -24,7 +34,8 @@ export const load: PageServerLoad = async ({ params }) => {
 		}
 
 		return {
-			bench
+			bench,
+			isLiked: bench.benchLikes.length > 0
 		};
 	}
 

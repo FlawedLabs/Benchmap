@@ -1,6 +1,17 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
+
+	"app_description": "An app to find the nearest bench.",
+
 	"hello_world": "Hello, {name} from en!",
 	"continue_github": "Continue with GitHub",
-	"sign_out": "Sign out"
+	"sign_out": "Sign out",
+	"sign_in": "Sign in",
+	"sign_in_with": "Sign in with {provider}",
+
+	"bench_state_open": "Open",
+	"bench_state_closed": "Closed",
+
+	"geolocation_error": "Geolocation is not available.",
+	"geolocation_permission_error": "Geolocation has been denied."
 }

@@ -1,6 +1,17 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
+
+	"app_description": "Une application pour trouver le banc le plus proche.",
+
 	"hello_world": "Hello, {name} from fr!",
 	"continue_github": "Continuer avec GitHub",
-	"sign_out": "Se déconnecter"
+	"sign_out": "Se déconnecter",
+	"sign_in": "Se connecter",
+	"sign_in_with": "Se connecter avec {provider}",
+
+	"bench_state_open": "Ouvert",
+	"bench_state_closed": "Fermé",
+
+	"geolocation_error": "La géolocalisation n'est pas disponible.",
+	"geolocation_permission_error": "La géolocalisation a été refusée."
 }

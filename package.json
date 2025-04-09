@@ -14,7 +14,7 @@
 		"lint": "prettier --check .",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
-		"seed": "ts-node prisma/seed.ts"
+		"seed": "tsx prisma/seed.ts"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^4.0.0",
@@ -45,6 +45,7 @@
 		"@inlang/paraglide-js": "^2.0.11",
 		"@lucide/svelte": "^0.487.0",
 		"@prisma/client": "^6.6.0",
+		"animejs": "^4.0.1",
 		"better-auth": "^1.2.5",
 		"better-sqlite3": "^11.9.1",
 		"leaflet": "^1.9.4",

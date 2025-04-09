@@ -1,13 +1,13 @@
 import { json } from '@sveltejs/kit';
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 export async function GET() {
 	const benches = await prisma.bench.findMany({
 		include: {
-			tags: true,
-		},
-	})
+			tags: true
+		}
+	});
 
-	return json(benches)
+	return json(benches);
 }
