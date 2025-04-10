@@ -1,6 +1,9 @@
 .idea
 node_modules
 
+# Project
+./prisma/dev.db
+
 # Output
 .output
 .vercel

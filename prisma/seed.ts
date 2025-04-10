@@ -77,7 +77,8 @@ async function main() {
 				latitude: 46.1991,
 				longitude: 6.1457,
 				address: 'Promenade des Bastions, 1204 Genève',
-				openingHours: '24/7',
+				openFrom: null, // Open 24/7
+				openUntil: null,
 				rating: 4.5,
 				tags: {
 					connect: [{ name: 'vue-panoramique' }, { name: 'ombragé' }]
@@ -93,10 +94,28 @@ async function main() {
 				latitude: 46.2026,
 				longitude: 6.1527,
 				address: 'Quai du Général-Guisan, 1204 Genève',
-				openingHours: '6h-22h',
+				openFrom: '06:00',
+				openUntil: '22:00',
 				rating: 4.2,
 				tags: {
 					connect: [{ name: 'romantique' }, { name: 'calme' }]
+				}
+			}
+		}),
+		prisma.bench.upsert({
+			where: { slug: 'banc-parc-mon-repos' },
+			update: {},
+			create: {
+				title: 'Banc du Parc Mon Repos',
+				slug: 'banc-parc-mon-repos',
+				latitude: 46.2122,
+				longitude: 6.1539,
+				address: 'Parc Mon Repos, Rue de Lausanne, 1202 Genève',
+				openFrom: '07:00',
+				openUntil: '20:00',
+				rating: 4.8,
+				tags: {
+					connect: [{ name: 'calme' }, { name: 'ombragé' }]
 				}
 			}
 		})
@@ -134,21 +153,63 @@ async function main() {
 					connect: [{ name: 'romantique' }]
 				}
 			}
+		}),
+		prisma.review.create({
+			data: {
+				comment: 'Un havre de paix au milieu du parc. Idéal pour lire un livre.',
+				rating: 4.8,
+				reviewer: {
+					connect: { id: users[0].id }
+				},
+				bench: {
+					connect: { id: benches[2].id }
+				},
+				tags: {
+					connect: [{ name: 'calme' }, { name: 'ombragé' }]
+				}
+			}
 		})
 	]);
 
 	// Create likes
 	const likes = await Promise.all([
-		prisma.benchLike.create({
-			data: {
+		prisma.benchLike.upsert({
+			where: {
+				userId_benchId: {
+					userId: users[0].id,
+					benchId: benches[1].id
+				}
+			},
+			update: {},
+			create: {
 				user: { connect: { id: users[0].id } },
 				bench: { connect: { id: benches[1].id } }
 			}
 		}),
-		prisma.benchLike.create({
-			data: {
+		prisma.benchLike.upsert({
+			where: {
+				userId_benchId: {
+					userId: users[1].id,
+					benchId: benches[0].id
+				}
+			},
+			update: {},
+			create: {
 				user: { connect: { id: users[1].id } },
 				bench: { connect: { id: benches[0].id } }
+			}
+		}),
+		prisma.benchLike.upsert({
+			where: {
+				userId_benchId: {
+					userId: users[1].id,
+					benchId: benches[2].id
+				}
+			},
+			update: {},
+			create: {
+				user: { connect: { id: users[1].id } },
+				bench: { connect: { id: benches[2].id } }
 			}
 		})
 	]);

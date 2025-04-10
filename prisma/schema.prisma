@@ -70,19 +70,20 @@ model Verification {
 }
 
 model Bench {
-  id           String      @id @default(uuid())
-  title        String
-  slug         String      @unique
-  latitude     Float
-  longitude    Float
-  address      String?
-  openingHours String?
-  rating       Float       @default(0)
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-  tags         Tag[]
-  reviews      Review[]
-  benchLikes   BenchLike[]
+  id         String      @id @default(uuid())
+  title      String
+  slug       String      @unique
+  latitude   Float
+  longitude  Float
+  address    String?
+  openFrom   String?
+  openUntil  String?
+  rating     Float       @default(0)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  tags       Tag[]
+  reviews    Review[]
+  benchLikes BenchLike[]
 
   @@map("bench")
 }

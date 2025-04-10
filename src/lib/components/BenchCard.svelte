@@ -1,9 +1,21 @@
-<script lang="ts">
+<script lang="ts" module>
 	import { Share } from '@lucide/svelte';
 	import Slider from '$lib/components/Slider.svelte';
 	import { goto } from '$app/navigation';
+	import { Prisma } from '@prisma/client';
+	import DistanceEstimation from './DistanceEstimation.svelte';
 
-	let bench = $props();
+	type IProps = {
+		// This tell Prisma that we want to include the tags relation in the bench object
+		// as it's not included by default
+		bench: Prisma.BenchGetPayload<{
+			include: { tags: true };
+		}>;
+	};
+</script>
+
+<script lang="ts">
+	let { bench }: IProps = $props();
 </script>
 
 <div
@@ -15,9 +27,8 @@
 >
 	<div class="relative">
 		<Slider />
-		<span
-			class="absolute top-2 left-2 rounded-full bg-white px-2 py-1 text-sm text-gray-700 shadow"
-		>En vedette ✨</span
+		<span class="absolute top-2 left-2 rounded-full bg-white px-2 py-1 text-sm text-gray-700 shadow"
+			>En vedette ✨</span
 		>
 		<button class="absolute top-2 right-2 rounded-full bg-white p-1 shadow">
 			<Share size={16} />
@@ -27,7 +38,7 @@
 		<div class="mb-1 flex items-center text-sm text-gray-500">
 			<span class="font-semibold text-green-600">● Ouvert</span>
 			<span class="mx-2">•</span>
-			<span>320 m</span>
+			<DistanceEstimation latitude={bench.latitude} longitude={bench.longitude} />
 		</div>
 
 		<h2 class="text-lg font-semibold text-gray-900">{bench.title}</h2>
@@ -35,12 +46,13 @@
 
 		<div class="mt-3 flex flex-wrap gap-2">
 			{#each bench.tags as tag}
-				<span class="rounded-full bg-{tag.color}-100 px-3 py-1 text-sm text-gray-700">{tag.name}</span>
+				<span class="rounded-full bg-{tag.color}-100 px-3 py-1 text-sm text-gray-700"
+					>{tag.name}</span
+				>
 			{/each}
 			<button class="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700"
-			>Voir les plages horaires
-			</button
-			>
+				>Voir les plages horaires
+			</button>
 		</div>
 
 		<div class="mt-3 text-sm font-medium text-gray-700">★ 4,68</div>

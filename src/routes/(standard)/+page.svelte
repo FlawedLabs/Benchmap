@@ -36,5 +36,5 @@
 	{/if}
 </div>
 {#each data.benches as bench}
-	<BenchCard {...bench} />
+	<BenchCard {bench} />
 {/each}

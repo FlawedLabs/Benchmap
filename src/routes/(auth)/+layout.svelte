@@ -1,10 +1,9 @@
 <script lang="ts">
-	import LangSelect from '$lib/components/LangSelect.svelte';
 	import { Toaster } from 'svelte-sonner';
-	import '../app.css';
-	import ProfilePicture from '$lib/components/ProfilePicture.svelte';
+	import '../../app.css';
 	import { authClient } from '$lib/auth-client';
 	import { m } from '$lib/paraglide/messages';
+	import Navbar from '$lib/components/Navbar.svelte';
 
 	let { children } = $props();
 
@@ -22,18 +21,7 @@
 </svelte:head>
 
 <header>
-	<nav class="flex items-center justify-end p-4">
-		<div>
-			<LangSelect lang="fr" />
-			<LangSelect lang="en" />
-		</div>
-
-		{#if $session?.data?.user}
-			<ProfilePicture src={$session.data.user.image} />
-		{:else}
-			<span>{m.sign_in()}</span>
-		{/if}
-	</nav>
+	<Navbar user={$session?.data?.user} isFull={false} />
 </header>
 <main>
 	{@render children()}
