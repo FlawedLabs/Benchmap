@@ -35,6 +35,7 @@
 		</button>
 	{/if}
 </div>
+
 {#each data.benches as bench}
 	<BenchCard {bench} />
 {/each}

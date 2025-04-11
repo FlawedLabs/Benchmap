@@ -3,6 +3,8 @@
 
 	"app_description": "Une application pour trouver le banc le plus proche.",
 
+	"languages": "Langages",
+
 	"hello_world": "Hello, {name} from fr!",
 	"continue_github": "Continuer avec GitHub",
 	"sign_out": "Se déconnecter",

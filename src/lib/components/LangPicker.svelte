@@ -6,6 +6,7 @@
 	import { setLocale, locales, getLocale } from '$lib/paraglide/runtime';
 	import type { Action } from 'svelte/action';
 	import { fade } from 'svelte/transition';
+	import { m } from '$lib/paraglide/messages';
 
 	// Update whenever new languages are added
 	const langEnum = {
@@ -38,7 +39,7 @@
 		class="flex cursor-pointer items-center gap-2 rounded-md p-2 text-gray-700 hover:bg-gray-100"
 		onclick={() => (isOpen = !isOpen)}
 	>
-		Languages
+		{m.languages()}
 		<span class={`transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
 			<ChevronDown size={14} />
 		</span>

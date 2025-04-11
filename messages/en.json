@@ -3,6 +3,8 @@
 
 	"app_description": "An app to find the nearest bench.",
 
+	"languages": "Languages",
+
 	"hello_world": "Hello, {name} from en!",
 	"continue_github": "Continue with GitHub",
 	"sign_out": "Sign out",

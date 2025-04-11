@@ -7,6 +7,7 @@
 	import type { PageProps } from './$types';
 	import DistanceEstimation from '$lib/components/DistanceEstimation.svelte';
 	import { m } from '$lib/paraglide/messages';
+	import { calculateAverage } from '$lib/utils/Utils';
 </script>
 
 <script lang="ts">
@@ -85,8 +86,7 @@
 					{/if}</span
 				>
 				<span class="font-medium"
-					>★ {data.bench?.reviews.reduce((acc, review) => acc + review.rating, 0) /
-						data.bench?.reviews.length}</span
+					>★ {calculateAverage(data.bench.reviews.map((review) => review.rating))}</span
 				>
 			</div>
 		{:else}

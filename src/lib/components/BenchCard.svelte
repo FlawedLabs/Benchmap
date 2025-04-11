@@ -4,6 +4,8 @@
 	import { goto } from '$app/navigation';
 	import { Prisma } from '@prisma/client';
 	import DistanceEstimation from './DistanceEstimation.svelte';
+	import { onMount } from 'svelte';
+	import { animate } from 'animejs';
 
 	type IProps = {
 		// This tell Prisma that we want to include the tags relation in the bench object
@@ -16,9 +18,27 @@
 
 <script lang="ts">
 	let { bench }: IProps = $props();
+
+	let benchContainer: HTMLDivElement | null = $state(null);
+
+	onMount(() => {
+		startAnimation();
+	});
+
+	const startAnimation = () => {
+		if (benchContainer) {
+			animate(benchContainer, {
+				opacity: [0, 1],
+				duration: 750,
+				easing: 'easeInOutQuad',
+				translateY: ['0px', '-20px']
+			});
+		}
+	};
 </script>
 
 <div
+	bind:this={benchContainer}
 	onclick={() => goto(`/bench/${bench.slug}`)}
 	onkeydown={(e) => e.key === 'Enter' && goto(`/bench/${bench.slug}`)}
 	role="button"
