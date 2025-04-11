@@ -1,22 +1,25 @@
 <script lang="ts" module>
 	import { Share } from '@lucide/svelte';
 	import Slider from '$lib/components/Slider.svelte';
-	import { goto } from '$app/navigation';
 	import { Prisma } from '@prisma/client';
 	import DistanceEstimation from './DistanceEstimation.svelte';
 	import { onMount } from 'svelte';
 	import { animate } from 'animejs';
+	import Rating from './Rating.svelte';
 
 	type IProps = {
-		// This tell Prisma that we want to include the tags relation in the bench object
+		// This tell Prisma that we want to include the tags and reviews relations in the bench object
 		// as it's not included by default
 		bench: Prisma.BenchGetPayload<{
-			include: { tags: true };
+			include: { tags: true; reviews: { select: { rating: true } } };
 		}>;
 	};
 </script>
 
 <script lang="ts">
+	import { getCurrentHours } from '$lib/utils/Date';
+	import OpeningState from './OpeningState.svelte';
+
 	let { bench }: IProps = $props();
 
 	let benchContainer: HTMLAnchorElement | null = $state(null);
@@ -56,7 +59,8 @@
 	</div>
 	<div class="p-4">
 		<div class="mb-1 flex items-center text-sm text-gray-500">
-			<span class="font-semibold text-green-600">● Ouvert</span>
+			<OpeningState {bench} currentHours={getCurrentHours()} />
+			<!-- <span class="font-semibold text-green-600">● Ouvert</span> -->
 			<span class="mx-2">•</span>
 			<DistanceEstimation latitude={bench.latitude} longitude={bench.longitude} />
 		</div>
@@ -75,6 +79,8 @@
 			</button>
 		</div>
 
-		<div class="mt-3 text-sm font-medium text-gray-700">★ 4,68</div>
+		<div class="mt-3 text-sm font-medium text-gray-700">
+			<Rating ratings={bench.reviews.map((review) => review.rating)} />
+		</div>
 	</div>
 </a>

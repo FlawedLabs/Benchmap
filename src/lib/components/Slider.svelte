@@ -5,7 +5,10 @@
 	let wasDragged = false;
 
 	const DRAGGED_THRESHOLD = 10;
+	const WHEEL_THRESHOLD = 300;
 	let buttons: HTMLButtonElement[] = [];
+	let touchStartX = 0;
+	let lastWheelTime = 0;
 
 	const images = [
 		'https://images.unsplash.com/photo-1445937888010-cc262f556033?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -62,14 +65,70 @@
 			buttons[index].focus();
 		}
 	};
+
+	// Mobile
+	const handleTouchStart = (event: TouchEvent) => {
+		event.stopPropagation();
+		touchStartX = event.touches[0].clientX;
+		isDragging = true;
+		wasDragged = false;
+	};
+
+	const handleTouchMove = (event: TouchEvent) => {
+		if (!isDragging) return;
+
+		event.stopPropagation();
+		event.preventDefault();
+
+		const deltaX = event.touches[0].clientX - touchStartX;
+
+		if (Math.abs(deltaX) > DRAGGED_THRESHOLD) {
+			wasDragged = true;
+		}
+
+		if (deltaX > 50) {
+			currentIndex = (currentIndex - 1 + images.length) % images.length;
+			isDragging = false;
+		} else if (deltaX < -50) {
+			currentIndex = (currentIndex + 1) % images.length;
+			isDragging = false;
+		}
+	};
+
+	const handleTouchEnd = (event: TouchEvent) => {
+		event.stopPropagation();
+		isDragging = false;
+	};
+
+	// Wheel event for laptop
+	const handleWheel = (event: WheelEvent) => {
+		event.preventDefault();
+
+		const currentTime = Date.now();
+		if (currentTime - lastWheelTime < WHEEL_THRESHOLD) return;
+
+		lastWheelTime = currentTime;
+
+		if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
+			if (event.deltaX > 50) {
+				currentIndex = (currentIndex + 1) % images.length;
+			} else if (event.deltaX < -50) {
+				currentIndex = (currentIndex - 1 + images.length) % images.length;
+			}
+		}
+	};
 </script>
 
 <div
-	class="relative mx-auto w-full max-w-2xl overflow-hidden rounded-lg select-none"
+	class="relative mx-auto w-full max-w-2xl touch-pan-y touch-pinch-zoom overflow-hidden rounded-lg select-none"
 	onmousedown={handleMouseDown}
 	onmousemove={handleMouseMove}
 	onmouseup={handleMouseUp}
 	onclick={handleClick}
+	ontouchstart={handleTouchStart}
+	ontouchmove={handleTouchMove}
+	ontouchend={handleTouchEnd}
+	onwheel={handleWheel}
 	role="slider"
 	tabindex="0"
 	aria-valuenow={currentIndex}

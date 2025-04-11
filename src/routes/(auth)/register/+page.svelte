@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { authClient } from '$lib/auth-client';
 	import SocialButton from '$lib/components/SocialButton.svelte';
+	import { m } from '$lib/paraglide/messages';
 	import { toast } from 'svelte-sonner';
 
 	let email = $state('');
@@ -28,9 +29,9 @@
 <div class="flex h-screen items-center justify-center overflow-hidden">
 	<div class="flex h-full w-full flex-col overflow-hidden bg-white md:flex-row">
 		<div class="flex flex-2/5 flex-col justify-center p-10">
-			<h2 class="mb-1 text-center text-2xl font-semibold text-gray-900">Connexion</h2>
+			<h2 class="mb-1 text-center text-2xl font-semibold text-gray-900">{m.sign_up()}</h2>
 			<p class="mb-8 text-center text-sm text-gray-500">
-				Sauvegardez vos bancs préférés et partez à l'aventure
+				{m.catch_phrase()}
 			</p>
 
 			<form class="space-y-4">
@@ -49,8 +50,8 @@
 
 				<div>
 					<div class="mb-1 flex justify-between">
-						<label class="text-sm text-gray-700" for="password">Password</label>
-						<a href="#" class="text-sm text-gray-500 hover:underline">Forgot my password</a>
+						<label class="text-sm text-gray-700" for="password">{m.password()}</label>
+						<a href="#" class="text-sm text-gray-500 hover:underline">{m.forgot_password()}</a>
 					</div>
 					<input
 						bind:value={password}
@@ -66,12 +67,12 @@
 					type="submit"
 					class="w-full cursor-pointer rounded-md bg-black bg-gradient-to-r py-2 text-sm text-white transition hover:opacity-90"
 				>
-					Sign up
+					{m.sign_up()}
 				</button>
 
 				<div class="flex items-center justify-between">
 					<hr class="w-full border-gray-300" />
-					<span class="mx-2 text-sm text-gray-500">or</span>
+					<span class="mx-2 text-sm text-gray-500">{m.or()}</span>
 					<hr class="w-full border-gray-300" />
 				</div>
 
@@ -79,8 +80,8 @@
 			</form>
 
 			<p class="mt-6 text-center text-sm text-gray-500">
-				Already have an account?
-				<a href="#" class="font-medium text-black hover:underline">Log in</a>
+				{m.already_have_account()}
+				<a href="#" class="font-medium text-black hover:underline">{m.sign_in()}</a>
 			</p>
 		</div>
 

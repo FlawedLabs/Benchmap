@@ -3,13 +3,18 @@
 
 	"app_description": "An app to find the nearest bench.",
 
-	"languages": "Languages",
-
 	"hello_world": "Hello, {name} from en!",
 	"continue_github": "Continue with GitHub",
 	"sign_out": "Sign out",
 	"sign_in": "Sign in",
+	"or": "or",
 	"sign_in_with": "Sign in with {provider}",
+	"sign_up": "Sign up",
+	"sign_up_with": "Sign up with {provider}",
+	"forgot_password": "Forgot password",
+	"password": "Password",
+	"already_have_account": "Already have an account?",
+	"catch_phrase": "Find the perfect bench to relax and enjoy life.",
 
 	"bench_state_open": "Open",
 	"bench_state_closed": "Closed",

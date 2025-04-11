@@ -26,7 +26,18 @@
 			{#if user}
 				<ProfilePicture src={user.image} />
 			{:else}
-				<span>{m.sign_in()}</span>
+				<a
+					href="/register"
+					class="text-dark-600 hover:text-dark-800 rounded-md p-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 focus:ring-2"
+				>
+					{m.sign_up()}
+				</a>
+				<a
+					href="/login"
+					class="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-gray-800 hover:shadow-md active:scale-95 active:transform"
+				>
+					{m.sign_in()}
+				</a>
 			{/if}
 		</div>
 	{/if}

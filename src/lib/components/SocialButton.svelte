@@ -6,6 +6,8 @@
 
 <script lang="ts">
 	import { authClient } from '$lib/auth-client';
+	import { m } from '$lib/paraglide/messages';
+	import { capitalizeFirstLetter } from 'better-auth';
 
 	const { provider }: IProps = $props();
 
@@ -35,6 +37,6 @@
 				clip-rule="evenodd"
 			/>
 		</svg>
-		Sign in with Github
+		{m.sign_up_with({ provider: capitalizeFirstLetter(provider) })}
 	</button>
 {/if}

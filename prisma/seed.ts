@@ -79,7 +79,6 @@ async function main() {
 				address: 'Promenade des Bastions, 1204 Genève',
 				openFrom: null, // Open 24/7
 				openUntil: null,
-				rating: 4.5,
 				tags: {
 					connect: [{ name: 'vue-panoramique' }, { name: 'ombragé' }]
 				}
@@ -96,7 +95,6 @@ async function main() {
 				address: 'Quai du Général-Guisan, 1204 Genève',
 				openFrom: '06:00',
 				openUntil: '22:00',
-				rating: 4.2,
 				tags: {
 					connect: [{ name: 'romantique' }, { name: 'calme' }]
 				}
@@ -113,7 +111,6 @@ async function main() {
 				address: 'Parc Mon Repos, Rue de Lausanne, 1202 Genève',
 				openFrom: '07:00',
 				openUntil: '20:00',
-				rating: 4.8,
 				tags: {
 					connect: [{ name: 'calme' }, { name: 'ombragé' }]
 				}

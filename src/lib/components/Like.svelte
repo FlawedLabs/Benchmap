@@ -1,5 +1,6 @@
 <script lang="ts" module>
 	import { page } from '$app/state';
+	import { sleep } from '$lib/utils/Utils';
 
 	type IProps = {
 		isLiked?: boolean;
@@ -14,24 +15,35 @@
 
 	let container: HTMLElement;
 
-	const triggerLikeAnimation = () => {
-		const heart = document.createElement('div');
-		heart.className = 'heart-emoji absolute left-2 top-2 pointer-events-none';
-		heart.textContent = '❤️';
+	const LIKE_AMOUNT = 5;
 
-		container.appendChild(heart);
+	const triggerLikeAnimation = async () => {
+		if (!container) return;
 
-		animate(heart, {
-			keyframes: {
-				'0%': { y: 0 },
-				'75%': { x: Math.random() * 20 },
-				'100%': { y: -100 }
-			},
-			easing: 'inOut',
-			opacity: [1, 0],
-			duration: 1500,
-			onComplete: () => heart.remove()
-		});
+		let index = 0;
+		while (index < LIKE_AMOUNT) {
+			const heart = document.createElement('div');
+			heart.className = 'heart-emoji absolute left-2 top-2 pointer-events-none';
+			heart.textContent = '❤️';
+
+			container.appendChild(heart);
+
+			animate(heart, {
+				keyframes: {
+					'0%': { y: 0 },
+					'75%': { x: Math.random() * 100 - 50 },
+					'100%': { y: -100 }
+				},
+				easing: 'inOut',
+				opacity: [1, 0],
+				duration: 1500,
+				onComplete: () => heart.remove()
+			});
+
+			// Maybe we could use stagger but I'm too dumb to understand how it works
+			await sleep(50);
+			index++;
+		}
 	};
 
 	const addLike = async (slug: string) => {
@@ -53,7 +65,10 @@
 	};
 
 	const triggerLike = async () => {
-		triggerLikeAnimation();
+		if (!isLiked) {
+			triggerLikeAnimation();
+		}
+
 		isLiked = !isLiked;
 
 		const slug = page.params.slug;

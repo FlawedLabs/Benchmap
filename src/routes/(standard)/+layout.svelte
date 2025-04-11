@@ -23,7 +23,7 @@
 <header>
 	<Navbar user={$session?.data?.user} />
 </header>
-<main class="mt-16">
+<main class="mt-20">
 	{@render children()}
 	<Toaster richColors />
 </main>

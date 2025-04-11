@@ -7,13 +7,26 @@
 	import type { PageProps } from './$types';
 	import DistanceEstimation from '$lib/components/DistanceEstimation.svelte';
 	import { m } from '$lib/paraglide/messages';
-	import { calculateAverage } from '$lib/utils/Utils';
+	import Rating from '$lib/components/Rating.svelte';
+	import Slider from '$lib/components/Slider.svelte';
+	import { onMount } from 'svelte';
+	import { animate, stagger } from 'animejs';
 </script>
 
 <script lang="ts">
-	import Slider from '$lib/components/Slider.svelte';
-
 	const { data }: PageProps = $props();
+
+	let benchContainer: HTMLDivElement | null = null;
+
+	onMount(() => {
+		if (!benchContainer) return;
+
+		animate(benchContainer.children, {
+			opacity: [0, 1],
+			duration: stagger(500, { start: 500 }),
+			easing: 'easeInOutQuad'
+		});
+	});
 
 	const copyInClipboard = () => {
 		if (navigator.clipboard) {
@@ -33,7 +46,7 @@
 	/>
 </svelte:head>
 
-<div class="mx-auto max-w-2xl bg-white">
+<div class="mx-auto max-w-2xl bg-white" bind:this={benchContainer}>
 	<div class="relative">
 		<Slider />
 		<a href="/" class="absolute top-4 left-4 rounded-full bg-white p-2 shadow">
@@ -83,9 +96,7 @@
 						& {data.bench?.reviews.length - 1} personne{#if data.bench?.reviews.length > 2}s{/if}
 					{/if}</span
 				>
-				<span class="font-medium"
-					>★ {calculateAverage(data.bench.reviews.map((review) => review.rating))}</span
-				>
+				<Rating ratings={data.bench?.reviews.map((review) => review.rating)} />
 			</div>
 		{:else}
 			Soyez le premier à laisser un avis !

@@ -3,13 +3,18 @@
 
 	"app_description": "Une application pour trouver le banc le plus proche.",
 
-	"languages": "Langages",
-
 	"hello_world": "Hello, {name} from fr!",
 	"continue_github": "Continuer avec GitHub",
 	"sign_out": "Se déconnecter",
 	"sign_in": "Se connecter",
+	"or": "ou",
 	"sign_in_with": "Se connecter avec {provider}",
+	"sign_up": "S'inscrire",
+	"sign_up_with": "S'inscrire avec {provider}",
+	"forgot_password": "Mot de passe oublié",
+	"password": "Mot de passe",
+	"already_have_account": "Vous avez déjà un compte ?",
+	"catch_phrase": "Trouvez le banc parfait pour vous détendre et profiter de la vie.",
 
 	"bench_state_open": "Ouvert",
 	"bench_state_closed": "Fermé",
