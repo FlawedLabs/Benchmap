@@ -19,7 +19,7 @@
 <script lang="ts">
 	let { bench }: IProps = $props();
 
-	let benchContainer: HTMLDivElement | null = $state(null);
+	let benchContainer: HTMLAnchorElement | null = $state(null);
 
 	onMount(() => {
 		startAnimation();
@@ -37,20 +37,20 @@
 	};
 </script>
 
-<div
+<a
+	href={`/bench/${bench.slug}`}
 	bind:this={benchContainer}
-	onclick={() => goto(`/bench/${bench.slug}`)}
-	onkeydown={(e) => e.key === 'Enter' && goto(`/bench/${bench.slug}`)}
-	role="button"
-	tabindex="0"
-	class="mx-auto my-6 max-w-lg cursor-pointer overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md"
+	class="mx-auto my-6 block max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md transition-shadow hover:shadow-lg"
 >
 	<div class="relative">
 		<Slider />
 		<span class="absolute top-2 left-2 rounded-full bg-white px-2 py-1 text-sm text-gray-700 shadow"
 			>En vedette ✨</span
 		>
-		<button class="absolute top-2 right-2 rounded-full bg-white p-1 shadow">
+		<button
+			class="absolute top-2 right-2 rounded-full bg-white p-1 shadow"
+			onclick={(e) => e.preventDefault()}
+		>
 			<Share size={16} />
 		</button>
 	</div>
@@ -77,4 +77,4 @@
 
 		<div class="mt-3 text-sm font-medium text-gray-700">★ 4,68</div>
 	</div>
-</div>
+</a>

@@ -11,6 +11,8 @@
 </script>
 
 <script lang="ts">
+	import Slider from '$lib/components/Slider.svelte';
+
 	const { data }: PageProps = $props();
 
 	const copyInClipboard = () => {
@@ -33,11 +35,7 @@
 
 <div class="mx-auto max-w-2xl bg-white">
 	<div class="relative">
-		<img
-			src="https://images.unsplash.com/photo-1445937888010-cc262f556033?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-			alt="Banc rose"
-			class="h-64 w-full rounded-2xl object-cover sm:h-80"
-		/>
+		<Slider />
 		<a href="/" class="absolute top-4 left-4 rounded-full bg-white p-2 shadow">
 			<ArrowLeft size={16} />
 		</a>

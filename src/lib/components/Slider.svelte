@@ -2,6 +2,10 @@
 	let currentIndex = 0;
 	let startX = 0;
 	let isDragging = false;
+	let wasDragged = false;
+
+	const DRAGGED_THRESHOLD = 10;
+	let buttons: HTMLButtonElement[] = [];
 
 	const images = [
 		'https://images.unsplash.com/photo-1445937888010-cc262f556033?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -10,15 +14,26 @@
 	];
 
 	const handleMouseDown = (event: MouseEvent) => {
+		event.stopPropagation();
+		event.preventDefault();
+
 		startX = event.clientX;
 		isDragging = true;
+		wasDragged = false;
 	};
 
 	const handleMouseMove = (event: MouseEvent) => {
-		if (!isDragging) {
-			return;
-		}
+		if (!isDragging) return;
+
+		event.stopPropagation();
+		event.preventDefault();
+
 		const deltaX = event.clientX - startX;
+
+		// Check if the user has dragged the slider
+		if (Math.abs(deltaX) > DRAGGED_THRESHOLD) {
+			wasDragged = true;
+		}
 
 		if (deltaX > 50) {
 			currentIndex = (currentIndex - 1 + images.length) % images.length;
@@ -29,18 +44,40 @@
 		}
 	};
 
-	const handleMouseUp = () => {
+	const handleMouseUp = (event: MouseEvent) => {
+		event.stopPropagation();
+		event.preventDefault();
 		isDragging = false;
+	};
+
+	const handleClick = (event: MouseEvent | KeyboardEvent) => {
+		if (wasDragged) {
+			event.preventDefault(); // cancel anchor navigation
+		}
+	};
+
+	// Used for accessibility
+	const focusButton = (index: number) => {
+		if (buttons[index]) {
+			buttons[index].focus();
+		}
 	};
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	class="relative mx-auto w-full max-w-2xl overflow-hidden rounded-lg select-none"
 	onmousedown={handleMouseDown}
 	onmousemove={handleMouseMove}
 	onmouseup={handleMouseUp}
+	onclick={handleClick}
+	role="slider"
+	tabindex="0"
+	aria-valuenow={currentIndex}
+	aria-valuemin="0"
+	aria-valuemax={images.length - 1}
+	aria-label="Image slider"
+	aria-describedby="slider-description"
+	onkeypress={handleClick}
 >
 	<div
 		class="flex transition-transform duration-500"
@@ -53,15 +90,36 @@
 
 	<div class="absolute bottom-4 left-1/2 flex -translate-x-1/2 space-x-2">
 		{#each images as _, i}
-			<div
+			<button
+				bind:this={buttons[i]}
 				class="h-2 w-2 cursor-pointer rounded-full"
 				class:bg-gray-200={i === currentIndex}
 				class:bg-gray-400={i !== currentIndex}
 				onclick={(event) => {
-					event.stopPropagation()
-					currentIndex = i
+					event.stopPropagation();
+					event.preventDefault();
+					currentIndex = i;
 				}}
-			></div>
+				onkeydown={(event) => {
+					// Accessibility here you go 💪
+					if (event.key === 'ArrowRight' || event.key === ' ') {
+						event.stopPropagation();
+						event.preventDefault();
+
+						const nextIndex = (i + 1) % images.length;
+						currentIndex = nextIndex;
+						focusButton(nextIndex);
+					} else if (event.key === 'ArrowLeft') {
+						event.stopPropagation();
+						event.preventDefault();
+
+						const prevIndex = (i - 1 + images.length) % images.length;
+						currentIndex = prevIndex;
+						focusButton(prevIndex);
+					}
+				}}
+				aria-label="Select image {i + 1}"
+			></button>
 		{/each}
 	</div>
 </div>
