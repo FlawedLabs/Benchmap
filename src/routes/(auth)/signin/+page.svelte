@@ -29,38 +29,45 @@
 <div class="flex h-screen items-center justify-center overflow-hidden">
 	<div class="flex h-full w-full flex-col overflow-hidden bg-white md:flex-row">
 		<div class="flex flex-2/5 flex-col justify-center p-10">
-			<h2 class="mb-1 text-center text-2xl font-semibold text-gray-900">{m.sign_up()}</h2>
+			<h2 class="mb-1 text-center text-2xl font-semibold text-gray-900">{m.sign_in()}</h2>
 			<p class="mb-8 text-center text-sm text-gray-500">
 				{m.catch_phrase()}
 			</p>
 
 			<form class="space-y-4">
-				<label class="mb-1 block text-sm text-gray-700" for="email">Email</label>
-				<input
-					pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
-					bind:value={email}
-					required
-					id="email"
-					type="email"
-					placeholder="your@email.com"
-					class="w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-black focus:outline-none"
-				/>
+				<div>
+					<label class="mb-1 block text-sm text-gray-700" for="email">Email</label>
+					<input
+						pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+						bind:value={email}
+						required
+						id="email"
+						type="email"
+						placeholder="your@email.com"
+						class="w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-black focus:outline-none"
+					/>
+				</div>
 
-				<label class="text-sm text-gray-700" for="password">{m.password()}</label>
-				<input
-					bind:value={password}
-					required
-					id="password"
-					type="password"
-					class="w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-black focus:outline-none"
-				/>
+				<div>
+					<div class="mb-1 flex justify-between">
+						<label class="text-sm text-gray-700" for="password">{m.password()}</label>
+						<a href="#" class="text-sm text-gray-500 hover:underline">{m.forgot_password()}</a>
+					</div>
+					<input
+						bind:value={password}
+						required
+						id="password"
+						type="password"
+						class="w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-black focus:outline-none"
+					/>
+				</div>
 
 				<button
 					onclick={signin}
 					type="submit"
 					class="w-full cursor-pointer rounded-md bg-black bg-gradient-to-r py-2 text-sm text-white transition hover:opacity-90"
 				>
-					{m.sign_up()}
+					{m.sign_in()}
 				</button>
 
 				<div class="flex items-center justify-between">
@@ -73,8 +80,8 @@
 			</form>
 
 			<p class="mt-6 text-center text-sm text-gray-500">
-				{m.already_have_account()}
-				<a href="/signin" class="font-medium text-black hover:underline">{m.sign_in()}</a>
+				{m.dont_have_account()}
+				<a href="/register" class="font-medium text-black hover:underline">{m.sign_up()}</a>
 			</p>
 		</div>
 

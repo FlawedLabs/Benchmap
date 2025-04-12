@@ -6,6 +6,8 @@
 	import { onMount } from 'svelte';
 	import { animate } from 'animejs';
 	import Rating from './Rating.svelte';
+	import { getCurrentHours } from '$lib/utils/Date';
+	import OpeningState from './OpeningState.svelte';
 
 	type IProps = {
 		// This tell Prisma that we want to include the tags and reviews relations in the bench object
@@ -17,9 +19,6 @@
 </script>
 
 <script lang="ts">
-	import { getCurrentHours } from '$lib/utils/Date';
-	import OpeningState from './OpeningState.svelte';
-
 	let { bench }: IProps = $props();
 
 	let benchContainer: HTMLAnchorElement | null = $state(null);

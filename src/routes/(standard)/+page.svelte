@@ -1,11 +1,9 @@
 <script lang="ts" module>
 	import type { PageProps } from './$types';
+	import BenchCard from '$lib/components/BenchCard.svelte';
 </script>
 
 <script lang="ts">
-	import { authClient } from '$lib/auth-client';
-	import BenchCard from '$lib/components/BenchCard.svelte';
-
 	const { data }: PageProps = $props();
 </script>
 

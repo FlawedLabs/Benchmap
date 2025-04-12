@@ -1,14 +1,14 @@
 <script lang="ts" module>
+	import { authClient } from '$lib/auth-client';
+	import { m } from '$lib/paraglide/messages';
+	import { capitalizeFirstLetter } from 'better-auth';
+
 	type IProps = {
 		provider: 'github'; // add more providers here;
 	};
 </script>
 
 <script lang="ts">
-	import { authClient } from '$lib/auth-client';
-	import { m } from '$lib/paraglide/messages';
-	import { capitalizeFirstLetter } from 'better-auth';
-
 	const { provider }: IProps = $props();
 
 	const signin = async () => {
@@ -37,6 +37,6 @@
 				clip-rule="evenodd"
 			/>
 		</svg>
-		{m.sign_up_with({ provider: capitalizeFirstLetter(provider) })}
+		{m.continue_provider({ provider: capitalizeFirstLetter(provider) })}
 	</button>
 {/if}

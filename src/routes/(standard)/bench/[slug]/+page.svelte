@@ -46,7 +46,7 @@
 	/>
 </svelte:head>
 
-<div class="mx-auto max-w-2xl bg-white" bind:this={benchContainer}>
+<div class="mx-auto max-w-2xl" bind:this={benchContainer}>
 	<div class="relative">
 		<Slider />
 		<a href="/" class="absolute top-4 left-4 rounded-full bg-white p-2 shadow">

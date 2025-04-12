@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { Toaster } from 'svelte-sonner';
 	import '../../app.css';
-	import { authClient } from '$lib/auth-client';
 	import { m } from '$lib/paraglide/messages';
 	import Navbar from '$lib/components/Navbar.svelte';
+	import type { LayoutProps } from './$types';
 
-	let { children } = $props();
-
-	const session = authClient.useSession();
+	let { data, children }: LayoutProps = $props();
 </script>
 
 <svelte:head>
@@ -21,7 +19,7 @@
 </svelte:head>
 
 <header>
-	<Navbar user={$session?.data?.user} />
+	<Navbar user={data.session?.user} />
 </header>
 <main class="mt-20">
 	{@render children()}

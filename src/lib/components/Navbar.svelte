@@ -3,6 +3,7 @@
 	import type { User } from 'better-auth';
 	import LangPicker from './LangPicker.svelte';
 	import ProfilePicture from './ProfilePicture.svelte';
+	import MobileMenu from './MobileMenu.svelte';
 
 	type IProps = {
 		user: User | undefined;
@@ -12,17 +13,20 @@
 
 <script lang="ts">
 	let { user, isFull = true }: IProps = $props();
+	let isMenuOpen = $state(false);
 </script>
 
-<nav class="fixed top-0 flex max-h-16 w-screen items-center justify-between p-4">
+<nav
+	class="fixed top-0 z-50 flex max-h-16 w-screen items-center justify-between bg-white/80 p-4 backdrop-blur-sm"
+>
 	<h1 class="text-2xl font-bold text-gray-900">
 		<a href="/">Benchmap</a>
 	</h1>
 
 	{#if isFull}
-		<div class="flex items-center gap-2">
+		<!-- Desktop Menu -->
+		<div class="hidden items-center gap-2 md:flex">
 			<LangPicker />
-
 			{#if user}
 				<ProfilePicture src={user.image} />
 			{:else}
@@ -40,5 +44,8 @@
 				</a>
 			{/if}
 		</div>
+
+		<!-- Mobile Menu Button -->
+		<MobileMenu {isMenuOpen} {user} />
 	{/if}
 </nav>
