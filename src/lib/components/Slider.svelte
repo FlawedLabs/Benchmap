@@ -139,7 +139,7 @@
 	onkeypress={handleClick}
 >
 	<div
-		class="flex transition-transform duration-500"
+		class="flex transition-transform duration-500 hover:cursor-grab"
 		style="transform: translateX(-{currentIndex * 100}%)"
 	>
 		{#each images as image}

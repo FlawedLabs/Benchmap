@@ -1,28 +1,42 @@
 <script lang="ts">
-	import { authClient } from '$lib/auth-client';
+	import { enhance } from '$app/forms';
 	import SocialButton from '$lib/components/SocialButton.svelte';
 	import { m } from '$lib/paraglide/messages';
-	import { toast } from 'svelte-sonner';
+	import { UserRegisterSchema } from '$lib/schemas/AuthSchema';
+	import * as z from 'zod';
+	import {} from 'zod';
 
 	let email = $state('');
 	let password = $state('');
+	let name = $state('');
+
+	// Should be working for now :)
+	let errors: z.core.$ZodErrorTree<z.infer<typeof UserRegisterSchema>> | null = $state(null);
 
 	let imageLoaded = $state(false);
 
-	const signin = async () => {
-		await authClient.signIn.email(
-			{
-				email,
-				password,
-				callbackURL: '/',
-				rememberMe: true
-			},
-			{
-				onError(context) {
-					toast.error(context.error.message);
-				}
-			}
-		);
+	const signup = async (e: SubmitEvent) => {
+		const isValid = formValidation();
+
+		if (!isValid) {
+			return;
+		}
+	};
+
+	const formValidation = () => {
+		const result = UserRegisterSchema.safeParse({
+			email,
+			password,
+			name
+		});
+
+		if (!result.success) {
+			errors = z.treeifyError(result.error);
+			console.log(errors);
+			return false;
+		}
+
+		return true;
 	};
 </script>
 
@@ -34,29 +48,55 @@
 				{m.catch_phrase()}
 			</p>
 
-			<form class="space-y-4">
-				<label class="mb-1 block text-sm text-gray-700" for="email">Email</label>
-				<input
-					pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
-					bind:value={email}
-					required
-					id="email"
-					type="email"
-					placeholder="your@email.com"
-					class="w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-black focus:outline-none"
-				/>
+			<form class="space-y-4" method="POST" onsubmit={signup} use:enhance>
+				<div class="space-y-1">
+					<label class="block text-sm text-gray-700" for="email">Email</label>
+					<input
+						bind:value={email}
+						required
+						id="email"
+						type="email"
+						placeholder="your@email.com"
+						class="w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-black focus:outline-none"
+						class:border-red-500={errors?.properties?.email}
+					/>
+					{#if errors?.properties?.email}
+						<p class="text-xs text-red-500">{errors?.properties?.email.errors[0]}</p>
+					{/if}
+				</div>
 
-				<label class="text-sm text-gray-700" for="password">{m.password()}</label>
-				<input
-					bind:value={password}
-					required
-					id="password"
-					type="password"
-					class="w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-black focus:outline-none"
-				/>
+				<div class="space-y-1">
+					<label class="text-sm text-gray-700" for="username">{m.username()}</label>
+					<input
+						bind:value={name}
+						required
+						id="username"
+						type="text"
+						placeholder="John Doe"
+						class="w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-black focus:outline-none"
+						class:border-red-500={errors?.properties?.name}
+					/>
+					{#if errors?.properties?.name}
+						<p class="text-xs text-red-500">{errors?.properties?.name.errors[0]}</p>
+					{/if}
+				</div>
+
+				<div class="space-y-1">
+					<label class="text-sm text-gray-700" for="password">{m.password()}</label>
+					<input
+						bind:value={password}
+						required
+						id="password"
+						type="password"
+						class="w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-black focus:outline-none"
+						class:border-red-500={errors?.properties?.password}
+					/>
+					{#if errors?.properties?.password}
+						<p class="text-xs text-red-500">{errors?.properties?.password.errors[0]}</p>
+					{/if}
+				</div>
 
 				<button
-					onclick={signin}
 					type="submit"
 					class="w-full cursor-pointer rounded-md bg-black bg-gradient-to-r py-2 text-sm text-white transition hover:opacity-90"
 				>
