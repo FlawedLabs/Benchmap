@@ -13,6 +13,11 @@ export default defineConfig({
 			outdir: './src/lib/paraglide'
 		})
 	],
+	server: {
+		watch: {
+			ignored: ['**/prisma/dev.db', '**/prisma/dev.db-journal']
+		}
+	},
 	test: {
 		workspace: [
 			{

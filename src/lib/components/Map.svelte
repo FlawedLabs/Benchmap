@@ -1,5 +1,9 @@
 <script lang="ts" module>
 	import { env } from '$env/dynamic/public';
+	import 'leaflet/dist/leaflet.css';
+	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
+	import type * as Leaflet from 'leaflet';
 
 	type IProps = {
 		center: [number, number];
@@ -9,11 +13,6 @@
 </script>
 
 <script lang="ts">
-	import 'leaflet/dist/leaflet.css';
-	import { browser } from '$app/environment';
-	import { onMount } from 'svelte';
-	import type * as Leaflet from 'leaflet';
-
 	let { isMarkerDraggable, center, marker }: IProps = $props();
 
 	const dynamicImportLeaflet: Promise<typeof Leaflet> = browser

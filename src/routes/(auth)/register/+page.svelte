@@ -53,6 +53,7 @@
 					<label class="block text-sm text-gray-700" for="email">Email</label>
 					<input
 						bind:value={email}
+						name="email"
 						required
 						id="email"
 						type="email"
@@ -69,6 +70,7 @@
 					<label class="text-sm text-gray-700" for="username">{m.username()}</label>
 					<input
 						bind:value={name}
+						name="name"
 						required
 						id="username"
 						type="text"
@@ -84,6 +86,7 @@
 				<div class="space-y-1">
 					<label class="text-sm text-gray-700" for="password">{m.password()}</label>
 					<input
+						name="password"
 						bind:value={password}
 						required
 						id="password"
