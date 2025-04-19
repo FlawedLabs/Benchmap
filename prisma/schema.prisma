@@ -83,8 +83,21 @@ model Bench {
   tags       Tag[]
   reviews    Review[]
   benchLikes BenchLike[]
+  images     Image[] // Add this line
 
   @@map("bench")
+}
+
+model Image {
+  id        String   @id @default(uuid())
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  benchId String
+  bench   Bench  @relation(fields: [benchId], references: [id], onDelete: Cascade)
+
+  @@map("image")
 }
 
 model BenchLike {

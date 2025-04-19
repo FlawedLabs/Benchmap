@@ -17,7 +17,7 @@
 </script>
 
 <div
-	class="relative isolate rounded-md hover:bg-gray-100 focus:ring-2"
+	class="relative isolate rounded-md"
 	use:clickOutside={() => (isOpen = false)}
 	onclick={() => (isOpen = !isOpen)}
 	role="button"
@@ -32,7 +32,7 @@
 	{#if isOpen}
 		<div
 			transition:fade={{ duration: 150 }}
-			class="absolute top-full right-0 w-{width} rounded-lg border border-gray-200 bg-white shadow-lg"
+			class="absolute top-full right-0 w-{width} rounded-lg border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-900 dark:shadow-gray-800"
 		>
 			{@render dropdownItem()}
 		</div>

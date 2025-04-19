@@ -1,5 +1,5 @@
 <script lang="ts" module>
-	import { Heart, Plus, Search, Sparkles } from '@lucide/svelte';
+	import { CircleUserRound, Heart, Plus, Search, Sparkles } from '@lucide/svelte';
 	import ProfilePicture from './ProfilePicture.svelte';
 	import type { User } from 'better-auth';
 
@@ -13,28 +13,44 @@
 </script>
 
 <div
-	class="fixed right-0 bottom-0 left-0 z-50 flex h-[72px] items-center justify-around bg-white py-3 shadow-md"
+	class="fixed right-0 bottom-0 left-0 z-50 flex h-[72px] items-center justify-around bg-white py-3 shadow-md dark:bg-gray-900 dark:shadow-gray-800"
 >
-	<button class="cursor-pointer text-2xl">
+	<button
+		class="cursor-pointer text-2xl text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+	>
 		<Search />
 	</button>
 
-	<button class="cursor-pointer text-2xl">
+	<a
+		href="/bench/likes"
+		class="cursor-pointer text-2xl text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+	>
 		<Heart />
-	</button>
+	</a>
 
 	<a
 		href="/bench/add"
-		class="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-black text-3xl text-white shadow-md"
+		class="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-gray-900 text-3xl text-white shadow-md hover:bg-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600"
 	>
 		<Plus />
 	</a>
 
-	<button class="cursor-pointer text-2xl">
+	<button
+		class="cursor-pointer text-2xl text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+	>
 		<Sparkles />
 	</button>
 
-	<button class="cursor-pointer">
-		<ProfilePicture src={user?.image} />
-	</button>
+	{#if user}
+		<button class="cursor-pointer">
+			<!-- Broken need to be fixed, need to calc if enough space when dropdown bottom, otherwise we need to dropdown top -->
+			<ProfilePicture src={user?.image} />
+		</button>
+	{:else}
+		<div
+			class="text-2xl text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+		>
+			<CircleUserRound />
+		</div>
+	{/if}
 </div>
