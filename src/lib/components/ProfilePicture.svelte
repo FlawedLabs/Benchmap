@@ -19,7 +19,7 @@
 	{#if src}
 		<ButtonDropdown>
 			{#snippet button()}
-				<img {src} alt="Profile" class="h-8 w-8 cursor-pointer rounded-full" />
+				<img {src} alt="Profile" class="relative z-0 h-8 w-8 cursor-pointer rounded-full" />
 			{/snippet}
 
 			{#snippet dropdownItem()}

@@ -4,6 +4,7 @@
 	import { m } from '$lib/paraglide/messages';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import type { LayoutProps } from './$types';
+	import BottomMenu from '$lib/components/BottomMenu.svelte';
 
 	let { data, children }: LayoutProps = $props();
 </script>
@@ -21,7 +22,12 @@
 <header>
 	<Navbar user={data.session?.user} />
 </header>
-<main class="mt-20">
+
+<main class="mt-24 pb-[72px]">
 	{@render children()}
 	<Toaster richColors />
 </main>
+
+<footer>
+	<BottomMenu user={data.session?.user} />
+</footer>

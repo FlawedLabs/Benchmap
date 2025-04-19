@@ -52,15 +52,34 @@
 			<X size={24} />
 		</button>
 
-		<div class="flex h-full flex-col gap-4 p-6 pt-16">
+		<div class="flex h-full flex-col gap-4 p-6">
 			<div class="flex">
 				<!-- It appears under the profile picture gonna kms -->
 				<LangPicker />
+
+				{#if user}
+					<div class="flex">
+						<ProfilePicture src={user.image} />
+					</div>
+				{:else}
+					<div class="flex flex-col gap-2">
+						<a
+							href="/register"
+							class="w-full rounded-md p-2 text-center text-sm font-medium text-gray-700 hover:bg-gray-100"
+						>
+							{m.sign_up()}
+						</a>
+						<a
+							href="/login"
+							class="w-full rounded-lg bg-gray-900 px-4 py-2 text-center text-sm font-medium text-white hover:bg-gray-800"
+						>
+							{m.sign_in()}
+						</a>
+					</div>
+				{/if}
 			</div>
-			{#if user}
-				<div class="flex">
-					<ProfilePicture src={user.image} />
-				</div>
+
+			<div>
 				<div class="flex">
 					<a
 						href="/bench/add"
@@ -69,22 +88,7 @@
 						{m.add_bench()}
 					</a>
 				</div>
-			{:else}
-				<div class="flex flex-col gap-2">
-					<a
-						href="/register"
-						class="w-full rounded-md p-2 text-center text-sm font-medium text-gray-700 hover:bg-gray-100"
-					>
-						{m.sign_up()}
-					</a>
-					<a
-						href="/login"
-						class="w-full rounded-lg bg-gray-900 px-4 py-2 text-center text-sm font-medium text-white hover:bg-gray-800"
-					>
-						{m.sign_in()}
-					</a>
-				</div>
-			{/if}
+			</div>
 		</div>
 	</div>
 {/if}

@@ -61,7 +61,7 @@
 		<div class="h-96 w-full rounded-md bg-gray-200 dark:bg-gray-700"></div>
 	</div>
 {:then}
-	<div class="my-2 h-96 w-full rounded-md" bind:this={mapContainer}></div>
+	<div class="relative z-0 my-2 h-96 w-full rounded-md" bind:this={mapContainer}></div>
 {:catch error}
 	<p>Something went wrong: {error.message}</p>
 {/await}
