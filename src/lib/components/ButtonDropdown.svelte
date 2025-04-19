@@ -6,11 +6,12 @@
 	type IProps = {
 		button: Snippet;
 		dropdownItem: Snippet;
+		width?: string;
 	};
 </script>
 
 <script lang="ts">
-	let { button, dropdownItem }: IProps = $props();
+	let { button, dropdownItem, width = '48' }: IProps = $props();
 
 	let isOpen = $state(false);
 </script>
@@ -31,7 +32,7 @@
 	{#if isOpen}
 		<div
 			transition:fade={{ duration: 150 }}
-			class="absolute top-full right-0 w-48 rounded-lg border border-gray-200 bg-white shadow-lg"
+			class="absolute top-full right-0 w-{width} rounded-lg border border-gray-200 bg-white shadow-lg"
 		>
 			{@render dropdownItem()}
 		</div>

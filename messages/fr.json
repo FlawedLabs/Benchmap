@@ -20,5 +20,17 @@
 	"bench_state_closed": "Fermé",
 
 	"geolocation_error": "La géolocalisation n'est pas disponible.",
-	"geolocation_permission_error": "La géolocalisation a été refusée."
+	"geolocation_permission_error": "La géolocalisation a été refusée.",
+
+	"add_bench": "Ajouter un banc",
+	"title": "Titre",
+	"open_hours": "Heure d'ouverture",
+	"closing_hours": "Heure de fermeture",
+	"location": "Localisation",
+	"hour_format_message": "Veuillez utiliser le format HH:MM",
+	"error_hours": "L'heure de fermeture doit être postérieure à l'heure d'ouverture",
+	"bench_success": "Banc ajouté avec succès",
+	"bench_error": "Erreur lors de l'ajout du banc",
+	"select_tag": "Sélectionner un tag",
+	"in_progress": "En cours"
 }

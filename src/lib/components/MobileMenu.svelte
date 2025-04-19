@@ -61,6 +61,14 @@
 				<div class="flex">
 					<ProfilePicture src={user.image} />
 				</div>
+				<div class="flex">
+					<a
+						href="/bench/add"
+						class="text-dark-600 hover:text-dark-800 rounded-md p-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 focus:ring-2"
+					>
+						{m.add_bench()}
+					</a>
+				</div>
 			{:else}
 				<div class="flex flex-col gap-2">
 					<a

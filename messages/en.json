@@ -20,5 +20,17 @@
 	"bench_state_closed": "Closed",
 
 	"geolocation_error": "Geolocation is not available.",
-	"geolocation_permission_error": "Geolocation has been denied."
+	"geolocation_permission_error": "Geolocation has been denied.",
+
+	"add_bench": "Add Bench",
+	"title": "Title",
+	"open_hours": "Open hour",
+	"closing_hours": "Closing hour",
+	"location": "Location",
+	"hour_format_message": "Please use the format HH:MM",
+	"error_hours": "The closing hour must be after the opening hour",
+	"bench_success": "Bench added successfully",
+	"bench_error": "Error adding bench",
+	"select_tag": "Select a tag",
+	"in_progress": "In progress"
 }

@@ -26,6 +26,14 @@
 	{#if isFull}
 		<!-- Desktop Menu -->
 		<div class="hidden items-center gap-2 md:flex">
+			{#if user}
+				<a
+					href="/bench/add"
+					class="text-dark-600 hover:text-dark-800 rounded-md p-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 focus:ring-2"
+				>
+					Ajouter un banc
+				</a>
+			{/if}
 			<LangPicker />
 			{#if user}
 				<ProfilePicture src={user.image} />
