@@ -15,6 +15,13 @@
 <script lang="ts">
 	let { isMarkerDraggable, center, marker }: IProps = $props();
 
+	export const flyTo = (latlng: [number, number]) => {
+		if (mapInstance) {
+			mapInstance.flyTo(latlng, 13);
+			createMarker(latlng);
+		}
+	};
+
 	const dynamicImportLeaflet: Promise<typeof Leaflet> = browser
 		? import('leaflet').then((module) => module.default)
 		: new Promise(() => {});

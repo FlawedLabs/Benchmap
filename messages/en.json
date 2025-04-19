@@ -1,8 +1,6 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-
 	"app_description": "An app to find the nearest bench.",
-
 	"hello_world": "Hello, {name} from en!",
 	"continue_provider": "Continue with {provider}",
 	"sign_out": "Sign out",
@@ -15,13 +13,10 @@
 	"dont_have_account": "Don't have an account?",
 	"catch_phrase": "Find the perfect bench to relax and enjoy life.",
 	"username": "Username",
-
 	"bench_state_open": "Open",
 	"bench_state_closed": "Closed",
-
 	"geolocation_error": "Geolocation is not available.",
 	"geolocation_permission_error": "Geolocation has been denied.",
-
 	"add_bench": "Add Bench",
 	"title": "Title",
 	"open_hours": "Open hour",

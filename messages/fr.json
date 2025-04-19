@@ -1,8 +1,6 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-
 	"app_description": "Une application pour trouver le banc le plus proche.",
-
 	"hello_world": "Hello, {name} from fr!",
 	"continue_provider": "Continuer avec {provider}",
 	"sign_out": "Se déconnecter",
@@ -15,13 +13,10 @@
 	"dont_have_account": "Vous n'avez pas de compte ?",
 	"catch_phrase": "Trouvez le banc parfait pour vous détendre et profiter de la vie.",
 	"username": "Nom d'utilisateur",
-
 	"bench_state_open": "Ouvert",
 	"bench_state_closed": "Fermé",
-
 	"geolocation_error": "La géolocalisation n'est pas disponible.",
 	"geolocation_permission_error": "La géolocalisation a été refusée.",
-
 	"add_bench": "Ajouter un banc",
 	"title": "Titre",
 	"open_hours": "Heure d'ouverture",

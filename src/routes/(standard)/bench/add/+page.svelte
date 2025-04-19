@@ -13,7 +13,7 @@
 
 	const { data }: PageProps = $props();
 
-	const bench = $state({
+	const bench: z.infer<typeof BenchSchema> = $state({
 		title: '',
 		open_hours: '',
 		closing_hours: '',
@@ -21,11 +21,13 @@
 			lat: 0,
 			lng: 0
 		},
-		tags: [] as { slug: string }[]
+		tags: []
 	});
 
-	let center = $state() as [number, number];
-	let marker = $state() as [number, number] | undefined;
+	let center: [number, number] = $state([48.866667, 2.333333]);
+	let marker: [number, number] | undefined = $state();
+
+	let map: Map;
 
 	let isSubmitting = $state(false);
 	let errors: z.core.$ZodErrorTree<z.infer<typeof BenchSchema>> | null = $state(null);
@@ -45,8 +47,8 @@
 		if ('geolocation' in navigator) {
 			navigator.geolocation.getCurrentPosition(
 				(position) => {
-					center = [position.coords.latitude, position.coords.longitude];
 					marker = [position.coords.latitude, position.coords.longitude];
+					map.flyTo(marker);
 				},
 				() => {
 					toast.error(m.geolocation_permission_error());
@@ -148,7 +150,7 @@
 
 		<div>
 			<label class="mb-1 block text-sm text-gray-700" for="closing_hours">{m.location()}</label>
-			<Map {center} isMarkerDraggable={true} {marker} />
+			<Map bind:this={map} {center} isMarkerDraggable {marker} />
 			{#if errors?.properties?.location}
 				<p class="text-xs text-red-500">{errors?.properties?.location.errors[0]}</p>
 			{/if}
