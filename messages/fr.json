@@ -34,4 +34,10 @@
 	"reviews_written": "Avis écrits",
 	"added_benches": "Bancs ajoutés",
 	"no_benches_added": "Aucun banc ajouté pour le moment"
+	"add_review": "Ajouter un avis",
+	"cancel": "Annuler",
+	"submit": "Envoyer",
+	"write_review": "Écrire un avis",
+	"review_success": "Avis ajouté avec succès",
+	"review_error": "Erreur lors de l'ajout de l'avis"
 }
