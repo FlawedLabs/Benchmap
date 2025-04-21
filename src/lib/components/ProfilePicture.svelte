@@ -6,17 +6,18 @@
 
 	type IProps = {
 		src?: string | null;
+		isLink?: boolean;
 	};
 </script>
 
 <script lang="ts">
-	const { src }: IProps = $props();
+	const { src, isLink = false }: IProps = $props();
 
 	const session = authClient.useSession();
 </script>
 
-<div>
-	{#if src}
+{#if src}
+	{#if !isLink}
 		<ButtonDropdown>
 			{#snippet button()}
 				<img {src} alt="Profile" class="relative z-0 h-8 w-8 cursor-pointer rounded-full" />
@@ -35,7 +36,7 @@
 
 					<div class="py-1">
 						<a
-							href="/profile"
+							href="/profile/{$session?.data?.user.name}"
 							class="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50"
 						>
 							<User size={16} class="text-gray-400" />
@@ -68,8 +69,10 @@
 			{/snippet}
 		</ButtonDropdown>
 	{:else}
-		<div class="flex h-8 w-8 items-center justify-center rounded-full bg-amber-500">
-			{$session?.data?.user.name[0].toUpperCase()}
-		</div>
+		<img {src} alt="Profile" class="relative z-0 h-8 w-8 cursor-pointer rounded-full" />
 	{/if}
-</div>
+{:else}
+	<div class="flex h-8 w-8 items-center justify-center rounded-full bg-amber-500">
+		{$session?.data?.user.name[0].toUpperCase()}
+	</div>
+{/if}

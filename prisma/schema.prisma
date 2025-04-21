@@ -9,7 +9,7 @@ datasource db {
 
 model User {
   id            String      @id @default(uuid())
-  name          String
+  name          String      @unique
   email         String
   emailVerified Boolean
   image         String?
@@ -19,6 +19,7 @@ model User {
   accounts      Account[]
   reviews       Review[]
   benchLikes    BenchLike[]
+  benches       Bench[]
 
   @@unique([email])
   @@map("user")
@@ -83,7 +84,9 @@ model Bench {
   tags       Tag[]
   reviews    Review[]
   benchLikes BenchLike[]
-  images     Image[] // Add this line
+  images     Image[]
+  createdBy  User?       @relation(fields: [userId], references: [id])
+  userId     String?
 
   @@map("bench")
 }

@@ -27,5 +27,11 @@
 	"bench_success": "Bench added successfully",
 	"bench_error": "Error adding bench",
 	"select_tag": "Select a tag",
-	"in_progress": "In progress"
+	"in_progress": "In progress",
+	"member_since": "Member since",
+	"benches_added": "Benches added",
+	"likes_count": "Likes count",
+	"reviews_written": "Reviews written",
+	"added_benches": "Added benches",
+	"no_benches_added": "No benches added yet"
 }

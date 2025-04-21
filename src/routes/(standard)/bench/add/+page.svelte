@@ -1,8 +1,5 @@
 <script lang="ts" module>
 	import type { PageProps } from './$types';
-</script>
-
-<script lang="ts">
 	import { m } from '$lib/paraglide/messages';
 	import Map from '$lib/components/Map.svelte';
 	import ButtonDropdown from '$lib/components/ButtonDropdown.svelte';
@@ -10,24 +7,28 @@
 	import * as z from 'zod';
 	import { BenchSchema } from '$lib/schemas/BenchSchema';
 	import { onMount } from 'svelte';
+	import type { BenchFormData } from '$lib/types/BenchTypes';
+</script>
 
+<script lang="ts">
 	const { data }: PageProps = $props();
 
-	const bench: z.infer<typeof BenchSchema> = $state({
-		title: '',
-		open_hours: '',
-		closing_hours: '',
+	const bench: BenchFormData = $state({
+		title: null,
+		open_hours: null,
+		closing_hours: null,
 		location: {
 			lat: 0,
 			lng: 0
 		},
-		tags: []
+		tags: [],
+		userId: null
 	});
+
+	let map: Map;
 
 	let center: [number, number] = $state([48.866667, 2.333333]);
 	let marker: [number, number] | undefined = $state();
-
-	let map: Map;
 
 	let isSubmitting = $state(false);
 	let errors: z.core.$ZodErrorTree<z.infer<typeof BenchSchema>> | null = $state(null);

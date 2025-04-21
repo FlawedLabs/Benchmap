@@ -27,5 +27,11 @@
 	"bench_success": "Banc ajouté avec succès",
 	"bench_error": "Erreur lors de l'ajout du banc",
 	"select_tag": "Sélectionner un tag",
-	"in_progress": "En cours"
+	"in_progress": "En cours",
+	"member_since": "Membre depuis",
+	"benches_added": "Bancs ajoutés",
+	"likes_count": "Nombre de likes",
+	"reviews_written": "Avis écrits",
+	"added_benches": "Bancs ajoutés",
+	"no_benches_added": "Aucun banc ajouté pour le moment"
 }

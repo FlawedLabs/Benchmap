@@ -7,6 +7,7 @@ export const load: PageServerLoad = async ({ request }) => {
 		headers: request.headers
 	});
 
+	// Maybe redirect I still dunno
 	if (!session) {
 		return { benches: [] };
 	}

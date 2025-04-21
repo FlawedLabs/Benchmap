@@ -42,15 +42,15 @@
 	</button>
 
 	{#if user}
-		<button class="cursor-pointer">
-			<!-- Broken need to be fixed, need to calc if enough space when dropdown bottom, otherwise we need to dropdown top -->
-			<ProfilePicture src={user?.image} />
-		</button>
+		<a href="/profile/{user?.name}" class="cursor-pointer">
+			<ProfilePicture isLink src={user?.image} />
+		</a>
 	{:else}
-		<div
+		<a
+			href="/signin"
 			class="text-2xl text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
 		>
 			<CircleUserRound />
-		</div>
+		</a>
 	{/if}
 </div>

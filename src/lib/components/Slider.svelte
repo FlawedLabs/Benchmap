@@ -102,14 +102,14 @@
 
 	// Wheel event for laptop
 	const handleWheel = (event: WheelEvent) => {
-		event.preventDefault();
-
-		const currentTime = Date.now();
-		if (currentTime - lastWheelTime < WHEEL_THRESHOLD) return;
-
-		lastWheelTime = currentTime;
-
 		if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
+			event.preventDefault();
+
+			const currentTime = Date.now();
+			if (currentTime - lastWheelTime < WHEEL_THRESHOLD) return;
+
+			lastWheelTime = currentTime;
+
 			if (event.deltaX > 50) {
 				currentIndex = (currentIndex + 1) % images.length;
 			} else if (event.deltaX < -50) {
