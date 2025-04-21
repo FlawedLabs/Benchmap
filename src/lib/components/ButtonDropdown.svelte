@@ -7,19 +7,17 @@
 		button: Snippet;
 		dropdownItem: Snippet;
 		width?: string;
+		isOpen?: boolean;
 	};
 </script>
 
 <script lang="ts">
-	let { button, dropdownItem, width = '48' }: IProps = $props();
-
-	let isOpen = $state(false);
+	let { button, dropdownItem, width = '48', isOpen = $bindable(false) }: IProps = $props();
 </script>
 
 <div
-	class="relative isolate rounded-md"
+	class="relative isolate flex items-center rounded-md"
 	use:clickOutside={() => (isOpen = false)}
-	onclick={() => (isOpen = !isOpen)}
 	role="button"
 	tabindex="0"
 	onkeydown={(e) => {
@@ -28,7 +26,10 @@
 		}
 	}}
 >
-	{@render button()}
+	<button class="block w-full" type="button" onclick={() => (isOpen = !isOpen)}>
+		{@render button()}
+	</button>
+
 	{#if isOpen}
 		<div
 			transition:fade={{ duration: 150 }}

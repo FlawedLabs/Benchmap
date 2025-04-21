@@ -161,13 +161,12 @@
 			<label class="mb-1 block text-sm text-gray-700" for="tags">Tags</label>
 			<ButtonDropdown width="full">
 				{#snippet button()}
-					<button
-						type="button"
-						class="w-full rounded-md border border-gray-300 px-4 py-2 text-left focus:ring-2 focus:ring-black focus:outline-none"
+					<span
+						class="flex w-full rounded-md border border-gray-300 px-4 py-2 text-left focus:ring-2 focus:ring-black focus:outline-none"
 						class:border-red-500={errors?.properties?.tags}
 					>
 						{bench.tags.length > 0 ? bench.tags.map((tag) => tag.slug).join(', ') : m.select_tag()}
-					</button>
+					</span>
 				{/snippet}
 
 				{#snippet dropdownItem()}

@@ -1,6 +1,6 @@
 <script lang="ts" module>
 	import { authClient } from '$lib/auth-client';
-	import { LogOut, Settings, User, UserCog } from '@lucide/svelte';
+	import { LogOut, Settings, User } from '@lucide/svelte';
 	import ButtonDropdown from './ButtonDropdown.svelte';
 	import { goto } from '$app/navigation';
 
@@ -20,7 +20,11 @@
 	{#if !isLink}
 		<ButtonDropdown>
 			{#snippet button()}
-				<img {src} alt="Profile" class="relative z-0 h-8 w-8 cursor-pointer rounded-full" />
+				<img
+					{src}
+					alt="Profile"
+					class="relative z-0 h-8 w-8 cursor-pointer rounded-full transition-all hover:ring-4 hover:ring-gray-200 dark:hover:ring-gray-700"
+				/>
 			{/snippet}
 
 			{#snippet dropdownItem()}

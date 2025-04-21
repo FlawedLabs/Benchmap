@@ -27,18 +27,18 @@
 	};
 </script>
 
-<ButtonDropdown>
+<ButtonDropdown bind:isOpen>
 	{#snippet button()}
-		<button
+		<span
 			class="relative z-10 flex cursor-pointer items-center gap-2 rounded-md p-2 text-gray-700 hover:bg-gray-100 focus:ring-2 dark:text-gray-300 dark:hover:bg-gray-800"
-			onclick={() => (isOpen = !isOpen)}
 			onmouseenter={() => playAnimation()}
+			role="img"
 		>
 			<Languages size={18} />
 			<span class={`transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
 				<ChevronDown size={14} />
 			</span>
-		</button>
+		</span>
 	{/snippet}
 
 	{#snippet dropdownItem()}

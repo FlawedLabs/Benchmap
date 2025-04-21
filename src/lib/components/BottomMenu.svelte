@@ -35,11 +35,12 @@
 		<Plus />
 	</a>
 
-	<button
+	<a
+		href="/bench/discover"
 		class="cursor-pointer text-2xl text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
 	>
 		<Sparkles />
-	</button>
+	</a>
 
 	{#if user}
 		<a href="/profile/{user?.name}" class="cursor-pointer">
