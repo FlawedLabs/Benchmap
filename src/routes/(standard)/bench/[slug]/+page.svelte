@@ -11,6 +11,7 @@
 	import Slider from '$lib/components/Slider.svelte';
 	import { onMount } from 'svelte';
 	import { animate, stagger } from 'animejs';
+    import ReviewModal from "$lib/components/ReviewModal.svelte";
 </script>
 
 <script lang="ts">
@@ -63,9 +64,14 @@
 		</div>
 	</div>
 
-	<div class="p-4">
-		<h1 class="text-xl font-semibold text-gray-900">{data.bench?.title}</h1>
-		<p class="text-sm text-gray-500">{data.bench?.address}</p>
+    <div class="p-4">
+        <div class="text-xl font-semibold text-gray-900 flex justify-between items-center">
+            <h1>{data.bench?.title}</h1>
+            {#if data?.session?.user && !data?.reviewed}
+                <ReviewModal userId={data?.session?.user.id} benchId={data.bench?.id}/>
+            {/if}
+        </div>
+        <p class="text-sm text-gray-500">{data.bench?.address}</p>
 
 		<div class="mt-2 flex items-center text-sm text-gray-600">
 			<span class="flex items-center font-semibold text-green-600">

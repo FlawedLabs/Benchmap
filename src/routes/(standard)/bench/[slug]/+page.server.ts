@@ -34,6 +34,7 @@ export const load: PageServerLoad = async ({ params, request }) => {
 		}
 
 		return {
+			reviewed: !!bench.reviews.find(review => review.reviewer.id === session?.user.id),
 			bench,
 			isLiked: bench.benchLikes.length > 0
 		};
