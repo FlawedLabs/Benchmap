@@ -20,12 +20,15 @@ export const load: PageServerLoad = async ({ params, request }) => {
 					}
 				},
 				tags: true,
-				benchLikes: {
-					select: { id: true },
-					where: {
-						userId: session?.user?.id
-					}
-				}
+				// If user is logged in, include benchLikes
+				benchLikes: session?.user?.id
+					? {
+							select: { id: true },
+							where: {
+								userId: session.user.id
+							}
+						}
+					: false
 			}
 		});
 
@@ -33,10 +36,12 @@ export const load: PageServerLoad = async ({ params, request }) => {
 			error(404, 'Bench not found');
 		}
 
+		const isLiked = session?.user?.id ? bench.benchLikes.length > 0 : false;
+
 		return {
-			reviewed: !!bench.reviews.find(review => review.reviewer.id === session?.user.id),
+			reviewed: !!bench.reviews.find((review) => review.reviewer.id === session?.user.id),
 			bench,
-			isLiked: bench.benchLikes.length > 0
+			isLiked
 		};
 	}
 

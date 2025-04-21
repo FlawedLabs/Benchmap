@@ -11,7 +11,7 @@
 	import Slider from '$lib/components/Slider.svelte';
 	import { onMount } from 'svelte';
 	import { animate, stagger } from 'animejs';
-    import ReviewModal from "$lib/components/ReviewModal.svelte";
+	import ReviewModal from '$lib/components/ReviewModal.svelte';
 </script>
 
 <script lang="ts">
@@ -47,7 +47,7 @@
 	/>
 </svelte:head>
 
-<div class="mx-auto max-w-2xl" bind:this={benchContainer}>
+<div class="mx-auto max-w-2xl lg:pb-0" bind:this={benchContainer}>
 	<div class="relative">
 		<Slider />
 		<a href="/" class="absolute top-4 left-4 rounded-full bg-white p-2 shadow">
@@ -64,14 +64,14 @@
 		</div>
 	</div>
 
-    <div class="p-4">
-        <div class="text-xl font-semibold text-gray-900 flex justify-between items-center">
-            <h1>{data.bench?.title}</h1>
-            {#if data?.session?.user && !data?.reviewed}
-                <ReviewModal userId={data?.session?.user.id} benchId={data.bench?.id}/>
-            {/if}
-        </div>
-        <p class="text-sm text-gray-500">{data.bench?.address}</p>
+	<div class="p-4">
+		<div class="flex items-center justify-between text-xl font-semibold text-gray-900">
+			<h1>{data.bench?.title}</h1>
+			{#if data?.session?.user && !data?.reviewed}
+				<ReviewModal userId={data?.session?.user.id} benchId={data.bench?.id} />
+			{/if}
+		</div>
+		<p class="text-sm text-gray-500">{data.bench?.address}</p>
 
 		<div class="mt-2 flex items-center text-sm text-gray-600">
 			<span class="flex items-center font-semibold text-green-600">
@@ -128,11 +128,15 @@
 		marker={[data.bench?.latitude, data?.bench.longitude]}
 	/>
 
-	<div class="fixed inset-x-0 bottom-0 border-t bg-white p-3 sm:static sm:border-none sm:p-0">
-		<button
-			class="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-black py-3 text-lg text-white transition-all hover:scale-[0.98]"
+	<div class="p-3">
+		<a
+			href={`https://www.google.com/maps/dir/?api=1&destination=${data.bench?.latitude},${data.bench?.longitude}`}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-black py-3 text-lg text-white transition-all hover:scale-[0.98] dark:bg-gray-800"
 		>
-			Y aller <ArrowUpRight />
-		</button>
+			{m.go_there()}
+			<ArrowUpRight />
+		</a>
 	</div>
 </div>

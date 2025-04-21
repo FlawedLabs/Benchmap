@@ -58,6 +58,7 @@
 					<div class="my-1 h-px bg-gray-100"></div>
 
 					<button
+						data-sveltekit-reload
 						onclick={() =>
 							authClient.signOut({
 								fetchOptions: {

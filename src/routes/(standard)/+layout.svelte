@@ -14,7 +14,7 @@
 	<meta name="description" content={m.app_description()} />
 	<link rel="icon" href="/favicon.png" />
 	<link rel="apple-touch-icon" href="/favicon.png" />
-	<link rel="manifest" href="/manifest.webmanifest" />
+	<link rel="manifest" href="/manifest.json" />
 	<meta name="theme-color" content="#ffffff" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </svelte:head>

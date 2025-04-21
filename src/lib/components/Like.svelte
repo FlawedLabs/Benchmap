@@ -3,7 +3,7 @@
 	import { sleep } from '$lib/utils/Utils';
 
 	type IProps = {
-		isLiked?: boolean;
+		isLiked: boolean;
 	};
 </script>
 
@@ -64,6 +64,7 @@
 		});
 	};
 
+	// @TODO Check if the user is logged in otherwise do nothing :)
 	const triggerLike = async () => {
 		if (!isLiked) {
 			triggerLikeAnimation();

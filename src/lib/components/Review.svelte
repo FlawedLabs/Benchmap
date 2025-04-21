@@ -13,14 +13,17 @@
 <script lang="ts">
 	import ProfilePicture from './ProfilePicture.svelte';
 
-	const { profileSrc, reviewerName, comment, tags, createdAt = new Date() }: IProps = $props();
+	const { profileSrc, reviewerName, comment, tags, createdAt }: IProps = $props();
 </script>
 
 <div
 	class="rounded-xl bg-slate-50 p-4 text-sm text-gray-800 shadow-sm transition-shadow hover:shadow-md"
 >
 	<div class="mb-1 flex items-center gap-2">
-		<ProfilePicture src={profileSrc} />
+		<a href="/profile/{reviewerName}">
+			<ProfilePicture src={profileSrc} isLink={true} />
+		</a>
+
 		<span class="font-medium">{reviewerName}</span>
 	</div>
 	<p class="text-gray-700">
