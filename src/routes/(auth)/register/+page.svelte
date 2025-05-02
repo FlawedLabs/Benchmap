@@ -4,7 +4,6 @@
 	import { m } from '$lib/paraglide/messages';
 	import { UserRegisterSchema } from '$lib/schemas/AuthSchema';
 	import * as z from 'zod';
-	import {} from 'zod';
 
 	let email = $state('');
 	let password = $state('');

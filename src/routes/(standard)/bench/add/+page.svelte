@@ -96,19 +96,19 @@
 	};
 </script>
 
-<svelte:head></svelte:head>
-
 <div class="mx-auto max-w-2xl">
 	<form class="space-y-4" onsubmit={addBench}>
 		<div>
-			<label class="mb-1 block text-sm text-gray-700" for="email">{m.title()}</label>
+			<label class="mb-1 block text-sm text-gray-700 dark:text-gray-200" for="email"
+				>{m.title()}</label
+			>
 			<input
 				bind:value={bench.title}
 				required
 				id="title"
 				type="text"
 				placeholder="Banc du parc Paul Mistral"
-				class="w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-black focus:outline-none"
+				class="w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:ring-2 focus:ring-black focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:focus:ring-gray-500"
 				class:border-red-500={errors?.properties?.title}
 			/>
 			{#if errors?.properties?.title}
@@ -118,13 +118,15 @@
 
 		<div class="flex space-x-4">
 			<div class="w-1/2">
-				<label class="mb-1 block text-sm text-gray-700" for="open_hours">{m.open_hours()}</label>
+				<label class="mb-1 block text-sm text-gray-700 dark:text-gray-200" for="open_hours"
+					>{m.open_hours()}</label
+				>
 				<input
 					bind:value={bench.open_hours}
 					required
 					id="open_hours"
 					type="time"
-					class="w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-black focus:outline-none"
+					class="w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:ring-2 focus:ring-black focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:focus:ring-gray-500"
 					class:border-red-500={errors?.properties?.open_hours}
 				/>
 				{#if errors?.properties?.open_hours}
@@ -132,7 +134,7 @@
 				{/if}
 			</div>
 			<div class="w-1/2">
-				<label class="mb-1 block text-sm text-gray-700" for="closing_hours"
+				<label class="mb-1 block text-sm text-gray-700 dark:text-gray-200" for="closing_hours"
 					>{m.closing_hours()}</label
 				>
 				<input
@@ -140,7 +142,7 @@
 					required
 					id="closing_hours"
 					type="time"
-					class="w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-black focus:outline-none"
+					class="w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:ring-2 focus:ring-black focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:focus:ring-gray-500"
 					class:border-red-500={errors?.properties?.closing_hours}
 				/>
 				{#if errors?.properties?.closing_hours}
@@ -150,7 +152,9 @@
 		</div>
 
 		<div>
-			<label class="mb-1 block text-sm text-gray-700" for="closing_hours">{m.location()}</label>
+			<label class="mb-1 block text-sm text-gray-700 dark:text-gray-200" for="closing_hours"
+				>{m.location()}</label
+			>
 			<Map bind:this={map} {center} isMarkerDraggable {marker} />
 			{#if errors?.properties?.location}
 				<p class="text-xs text-red-500">{errors?.properties?.location.errors[0]}</p>
@@ -158,11 +162,11 @@
 		</div>
 
 		<div>
-			<label class="mb-1 block text-sm text-gray-700" for="tags">Tags</label>
+			<label class="mb-1 block text-sm text-gray-700 dark:text-gray-200" for="tags">Tags</label>
 			<ButtonDropdown width="full">
 				{#snippet button()}
 					<span
-						class="flex w-full rounded-md border border-gray-300 px-4 py-2 text-left focus:ring-2 focus:ring-black focus:outline-none"
+						class="flex w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-left text-gray-900 focus:ring-2 focus:ring-black focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:focus:ring-gray-500"
 						class:border-red-500={errors?.properties?.tags}
 					>
 						{bench.tags.length > 0 ? bench.tags.map((tag) => tag.slug).join(', ') : m.select_tag()}
@@ -171,15 +175,15 @@
 
 				{#snippet dropdownItem()}
 					<ul
-						class="absolute z-10 mt-1 w-full rounded-lg border border-gray-200 bg-white shadow-md"
+						class="absolute z-10 mt-1 w-full rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-600 dark:bg-gray-800"
 					>
 						{#each data.tags as tag}
 							<li
 								class="flex items-center px-4 py-2 transition-colors {bench.tags.some(
 									(t) => t.slug === tag.slug
 								)
-									? 'bg-gray-100'
-									: 'hover:bg-gray-50'}"
+									? 'bg-gray-100 dark:bg-gray-700'
+									: 'hover:bg-gray-50 dark:hover:bg-gray-700'}"
 							>
 								<button
 									type="button"
@@ -196,12 +200,14 @@
 										}
 									}}
 								>
-									<span class="flex h-5 w-5 items-center justify-center rounded-full border-2">
+									<span
+										class="flex h-5 w-5 items-center justify-center rounded-full border-2 border-gray-300 dark:border-gray-500"
+									>
 										{#if bench.tags.some((t) => t.slug === tag.slug)}
-											<div class="h-3 w-3 rounded-full bg-black"></div>
+											<div class="h-3 w-3 rounded-full bg-black dark:bg-white"></div>
 										{/if}
 									</span>
-									<span class="text-sm font-medium text-gray-700">
+									<span class="text-sm font-medium text-gray-700 dark:text-gray-200">
 										{tag.name}
 									</span>
 								</button>
@@ -217,7 +223,7 @@
 
 		<button
 			type="submit"
-			class="flex w-full cursor-pointer items-center justify-center rounded-md bg-black bg-gradient-to-r py-2 text-sm text-white transition hover:opacity-90"
+			class="flex w-full cursor-pointer items-center justify-center rounded-md bg-black py-2 text-sm text-white transition hover:opacity-90 dark:bg-gray-700"
 			disabled={isSubmitting}
 		>
 			{#if isSubmitting}

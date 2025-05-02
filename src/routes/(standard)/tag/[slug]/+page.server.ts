@@ -7,10 +7,16 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	if (slug) {
 		const benches = await prisma.bench.findMany({
-			where: { tags: { some: { slug } } }
+			where: { tags: { some: { slug } } },
+			include: {
+				tags: true,
+				reviews: {
+					select: {
+						rating: true
+					}
+				}
+			}
 		});
-
-		console.log(benches);
 
 		return {
 			benches

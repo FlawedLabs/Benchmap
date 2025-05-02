@@ -5,6 +5,7 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 	import type { LayoutProps } from './$types';
 	import BottomMenu from '$lib/components/BottomMenu.svelte';
+	import Sidebar from '$lib/components/Sidebar.svelte';
 
 	let { data, children }: LayoutProps = $props();
 </script>
@@ -24,6 +25,7 @@
 </header>
 
 <main class="mt-24 pb-[72px]">
+	<Sidebar tags={data.tags} />
 	{@render children()}
 	<Toaster richColors />
 </main>

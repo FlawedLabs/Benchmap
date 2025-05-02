@@ -52,8 +52,7 @@
 {#if showModal}
 	<div transition:fade={{ duration: 150 }} class="fixed inset-0 z-50">
 		<div
-			class="absolute inset-0"
-			style="background-color: rgba(0, 0, 0, 0.5);"
+			class="absolute inset-0 bg-black/50"
 			role="button"
 			aria-label="Fermer la modal"
 			tabindex="0"
